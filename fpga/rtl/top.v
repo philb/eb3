@@ -7,6 +7,7 @@ module top (mclk, netclk, txdata, rxdata, txen, irq, no_clock, idle, sck, mosi, 
    output irq;
    output no_clock;
    output idle;
+   input  ss;
    input sck;
    input mosi;
    output miso;
@@ -15,5 +16,14 @@ module top (mclk, netclk, txdata, rxdata, txen, irq, no_clock, idle, sck, mosi, 
    input  usart2;
    input  usart3;
    input  reset;		// FPGA2_SCK
-   
+
+   wire   flag;
+
+   wire [7:0] rx_byte;
+   wire       rx_byte_strobe;
+
+   rx_top RX(netclk, rxdata, reset, mclk, frame_complete, abort, idle, frame_valid, no_clock);
+
+   assign miso = frame_complete;
+
 endmodule // sdlc

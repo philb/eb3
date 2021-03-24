@@ -2,6 +2,8 @@
 #-- Project file /home/pb/eb/sdlc/sdlc/sdlc_syn.prj
 #project files
 
+add_file -verilog -lib work "rtl/rx_top.v" 
+add_file -verilog -lib work "rtl/top.v" 
 #implementation: "sdlc_Implmnt"
 impl -add sdlc_Implmnt -type fpga
 
@@ -51,5 +53,5 @@ set_option -write_apr_constraint 1
 project -result_format "edif"
 project -result_file ./sdlc_Implmnt/sdlc.edf
 project -log_file "./sdlc_Implmnt/sdlc.srr"
-impl -active "sdlc_Implmnt"
+impl -active sdlc_Implmnt
 project -run synthesis -clean
