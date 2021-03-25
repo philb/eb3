@@ -1,0 +1,34 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Wed Mar 24 10:34:59 2021
+[*]
+[dumpfile] "/home/pb/eb/fpga/test.vcd"
+[dumpfile_mtime] "Wed Mar 24 10:30:28 2021"
+[dumpfile_size] 695955
+[savefile] "/home/pb/eb/fpga/test.gtkw"
+[timestart] 0
+[size] 1558 717
+[pos] -1 -1
+*-8.000000 75 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[sst_width] 228
+[signals_width] 253
+[sst_expanded] 1
+[sst_vpaned_height] 182
+@28
+top.abort
+top.clk
+top.data
+top.frame_complete
+top.idle
+top.mclk
+top.no_clock
+top.reset
+top.valid
+@22
+top.RX.clk_detect_count[10:0]
+top.RX.rx_shift[7:0]
+@29
+top.RX.state[1:0]
+[pattern_trace] 1
+[pattern_trace] 0
