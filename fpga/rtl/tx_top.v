@@ -4,9 +4,9 @@ module tx_top(netclk, mclk, reset, txdata, flag_fill, data_in[7:0], data_availab
    input mclk;
    input reset;
    input flag_fill;
-   
+
    output txdata;
-   output        data_consumed; 	 
+   output        data_consumed;
 
    reg [2:0] state;
 
@@ -15,7 +15,7 @@ module tx_top(netclk, mclk, reset, txdata, flag_fill, data_in[7:0], data_availab
    parameter IN_FRAME = 3'b010;
    parameter FCS = 3'b011;
    parameter CLOSING_FLAG = 3'b100;
-   
+
    wire [15:0] new_crc;
    reg [15:0]  lfsr;
 
@@ -39,6 +39,9 @@ module tx_top(netclk, mclk, reset, txdata, flag_fill, data_in[7:0], data_availab
    assign new_crc[14] = lfsr[13];
    assign new_crc[15] = lfsr[14];
 
+   wire    [15:0]    not_crc;
+   assign not_crc[15:0] = lfsr[15:0] ^ 16'hffff;
+
    reg [7:0]   data;
    reg [4:0]   bitn;
    reg [4:0]   out_bits;
@@ -46,23 +49,23 @@ module tx_top(netclk, mclk, reset, txdata, flag_fill, data_in[7:0], data_availab
    input [7:0]   data_in;
    input 	 data_available;
    reg 		 data_consumed;
-   input 	 eop; 	       
+   input 	 eop;
 
    assign need_zero_insert = (state == IN_FRAME) && (out_bits[4:0] == 5'b11111);
-   assign txdata = need_zero_insert ? 1'b0 : ((state == IDLE) ? 1'b1 : ((state == FCS) ? !lfsr[0] : data[0]));
-   
-   always @(posedge netclk or posedge reset)
+   assign txdata = need_zero_insert ? 1'b0 : ((state == IDLE) ? 1'b1 : ((state == FCS) ? !lfsr[15] : data[0]));
+
+   always @(negedge netclk or posedge reset)
      begin
 	if (reset)
 	  begin
-	     state <= IDLE;	     
+	     state <= IDLE;
 	  end
 	else
 	  begin
 	     case (state)
 	       IDLE:
 		 begin
-		    data <= 8'h7E;	       
+		    data <= 8'h7E;
 		    bitn <= 0;
 
 		    if (flag_fill)
@@ -75,20 +78,20 @@ module tx_top(netclk, mclk, reset, txdata, flag_fill, data_in[7:0], data_availab
 		      end
 		    else
 		      begin
-			 state <= IDLE;			 
-		      end		    
+			 state <= IDLE;
+		      end
 		 end
-	       
+
 	       OPENING_FLAG:
 		 begin
 		    if (bitn == 7)
 		      begin
 			 bitn <= 0;
-			 out_bits <= 5'b00000;	       
-			 lfsr <= 16'hffff;	       
+			 out_bits <= 5'b00000;
+			 lfsr <= 16'hffff;
 			 state <= IN_FRAME;
 			 data <= data_in;
-			 data_consumed <= 1'b1;			 
+			 data_consumed <= 1'b1;
 		      end
 		    else
 		      begin
@@ -103,9 +106,9 @@ module tx_top(netclk, mclk, reset, txdata, flag_fill, data_in[7:0], data_availab
 
 		    if (!need_zero_insert)
 		      begin
-			 lfsr[15:0] <= new_crc[15:0];			 
+			 lfsr[15:0] <= new_crc[15:0];
 		      end
-		    
+
 		    if (bitn == 7)
 		      begin
 			 bitn <= 0;
@@ -116,13 +119,13 @@ module tx_top(netclk, mclk, reset, txdata, flag_fill, data_in[7:0], data_availab
 			   end
 			 else if (!eop)
 			   begin
-			      state <= CLOSING_FLAG;			      
-			      data <= 8'hff;			      
+			      state <= CLOSING_FLAG;
+			      data <= 8'hff;
 			   end
 			 else
 			   begin
-			      state <= FCS;			      
-			   end			 
+			      state <= FCS;
+			   end
 		      end
 		    else
 		      begin
@@ -138,29 +141,34 @@ module tx_top(netclk, mclk, reset, txdata, flag_fill, data_in[7:0], data_availab
 		 begin
 		    if (bitn == 15)
 		      begin
-			 bitn <= 0;			 
-			 state <= CLOSING_FLAG;			      
-			 data <= 8'h7e;			      
+			 bitn <= 0;
+			 state <= CLOSING_FLAG;
+			 data <= 8'h7e;
 		      end
 		    else
 		      begin
 			 bitn <= bitn + 1;
-			 lfsr <= { 1'b1, lfsr[15:1] };			 
+			 lfsr <= { lfsr[14:0], 1'b1 };
 		      end
 		 end
-	       
+
 	       CLOSING_FLAG:
 		 begin
-		    bitn <= bitn + 1;
-		    data <= { 1'b1, data[7:1] };	  
-		    
+		    data <= { 1'b1, data[7:1] };
+
 		    if (bitn == 7)
 		      begin
-			 state <= IDLE;
+			 bitn <= 0;
+			 data <= 8'h7e;
+			 state <= flag_fill ? CLOSING_FLAG : IDLE;
+		      end
+		    else
+		      begin
+			 bitn <= bitn + 1;
 		      end
 		 end
  	     endcase // case (state)
 	  end // else: !if(reset)
      end // always @ (posedge netclk or posedge reset)
-      
+
 endmodule // tx_top
