@@ -70,22 +70,26 @@ module rx_top(netclk, rxdata, reset, clk, frame_complete_out, abort_out, idle, f
    assign is_stuffing = ({ rxdata, rx_shift[7:3] } == 6'b011111);
    assign idle = (rx_shift[7:0] == 8'b11111111);
 
-   assign new_crc[0]  = rxdata ^ lfsr[15];
+   assign new_crc[0]  = rx_shift[7] ^ lfsr[15];
    assign new_crc[1]  = lfsr[0];
    assign new_crc[2]  = lfsr[1];
    assign new_crc[3]  = lfsr[2];
    assign new_crc[4]  = lfsr[3];
-   assign new_crc[5]  = lfsr[4] ^ rxdata ^ lfsr[15];
+   assign new_crc[5]  = lfsr[4] ^ rx_shift[7] ^ lfsr[15];
    assign new_crc[6]  = lfsr[5];
    assign new_crc[7]  = lfsr[6];
    assign new_crc[8]  = lfsr[7];
    assign new_crc[9]  = lfsr[8];
    assign new_crc[10] = lfsr[9];
    assign new_crc[11] = lfsr[10];
-   assign new_crc[12] = lfsr[11] ^ rxdata ^ lfsr[15];
+   assign new_crc[12] = lfsr[11] ^ rx_shift[7] ^ lfsr[15];
    assign new_crc[13] = lfsr[12];
    assign new_crc[14] = lfsr[13];
    assign new_crc[15] = lfsr[14];
+
+   wire        good_fcs;
+
+   assign good_fcs = (lfsr[15:0] == 16'h1d0f);
 
    always @(posedge netclk or posedge reset)
      begin
@@ -152,7 +156,6 @@ module rx_top(netclk, rxdata, reset, clk, frame_complete_out, abort_out, idle, f
 		 else if (is_flag)
 		   begin
 		      frame_complete <= 1'b1;
-		      frame_valid <= (lfsr[15:0] == 16'hf0b0);
 		      bit <= 3'h0;
 		      state <= START_FRAME;	// Maintain character sync
 		   end
