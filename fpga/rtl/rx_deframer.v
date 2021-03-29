@@ -7,7 +7,7 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
    output idle;
    output frame_complete;
    output frame_valid;
-   
+
    reg [1:0]  state;
 
    parameter HUNT = 2'b00;
@@ -54,7 +54,7 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 
    wire        good_fcs;
 
-   assign good_fcs = (lfsr[15:0] == 16'h1d0f);
+   assign good_fcs = (new_crc[15:0] == 16'h1d0f);
 
    always @(posedge netclk or posedge reset)
      begin
@@ -79,6 +79,7 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 		      state <= START_FRAME;
 		      byte_ready <= 1'b0;
 		      frame_complete <= 1'b0;
+		      frame_valid <= 1'b0;
 		   end
 		 else
 		   begin
@@ -94,6 +95,8 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 		   begin
 		      lfsr <= 16'hffff;
 		      bit <= 3'b000;
+		      frame_complete <= 1'b0;
+		      frame_valid <= 1'b0;
 		   end
 		 else if (!is_stuffing)
 		   begin
@@ -101,6 +104,8 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 		      lfsr <= new_crc;
 		      if (bit == 3'h7)
 			begin
+			   frame_complete <= 1'b0;
+			   frame_valid <= 1'b0;
 			   state <= IN_FRAME;
 			   bit <= 3'h0;
 			   byte_ready <= 1'b1;
@@ -132,6 +137,7 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 			begin
 			   bit <= 3'h0;
 			   byte_ready <= 1'b1;
+			   frame_valid <= good_fcs;
 			end
 		      else
 			begin
