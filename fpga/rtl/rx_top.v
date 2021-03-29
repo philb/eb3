@@ -11,9 +11,12 @@ module rx_top(netclk, rxdata, reset, clk, frame_complete_out, abort_out, idle, f
    output frame_valid_out;
    output no_clock;
 
+   wire   byte_ready;
+   wire [7:0] dout;
+
    clock_detect clock_detect_(netclk, clk, reset, no_clock);
-   rx_deframer rx_deframer_(netclk, reset, rxdata, abort, idle, frame_complete, frame_valid);
-   
+   rx_deframer rx_deframer_(netclk, reset, rxdata, abort, idle, frame_complete, frame_valid, byte_ready, dout);
+
    reg 	  frame_complete_out;
    reg 	  frame_valid_out;
    reg 	  abort_out;

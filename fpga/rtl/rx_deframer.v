@@ -1,4 +1,4 @@
-module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, frame_valid);
+module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, frame_valid, byte_ready, dout);
 
    input netclk;
    input reset;
@@ -7,6 +7,8 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
    output idle;
    output frame_complete;
    output frame_valid;
+   output byte_ready;
+   output [7:0] dout;
 
    reg [1:0]  state;
 
