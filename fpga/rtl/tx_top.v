@@ -107,49 +107,51 @@ module tx_top(netclk, mclk, reset, txdata, flag_fill, data_in[7:0], data_availab
 		    if (!need_zero_insert)
 		      begin
 			 lfsr[15:0] <= new_crc[15:0];
-		      end
 
-		    if (bitn == 7)
-		      begin
-			 bitn <= 0;
-			 if (!eop && data_available)
+			 if (bitn == 7)
 			   begin
-			      data <= data_in;
-			      data_consumed <= 1'b1;
-			   end
-			 else if (!eop)
-			   begin
-			      state <= CLOSING_FLAG;
-			      data <= 8'hff;
+			      bitn <= 0;
+			      if (!eop && data_available)
+				begin
+				   data <= data_in;
+				   data_consumed <= 1'b1;
+				end
+			      else if (!eop)
+				begin
+				   state <= CLOSING_FLAG;
+				   data <= 8'hff;
+				end
+			      else
+				begin
+				   state <= FCS;
+				end
 			   end
 			 else
 			   begin
-			      state <= FCS;
-			   end
-		      end
-		    else
-		      begin
-			 if (!need_zero_insert)
-			   begin
 			      bitn <= bitn + 1;
 			      data <= { 1'b1, data[7:1] };
-			   end
-		      end
+			   end // else: !if(bitn == 7)
+		      end // if (!need_zero_insert)
 		 end // case: IN_FRAME
 
 	       FCS:
 		 begin
-		    if (bitn == 15)
+		    out_bits <= { txdata, out_bits[4:1] };
+
+		    if (!need_zero_insert)
 		      begin
-			 bitn <= 0;
-			 state <= CLOSING_FLAG;
-			 data <= 8'h7e;
-		      end
-		    else
-		      begin
-			 bitn <= bitn + 1;
-			 lfsr <= { lfsr[14:0], 1'b1 };
-		      end
+			 if (bitn == 15)
+			   begin
+			      bitn <= 0;
+			      state <= CLOSING_FLAG;
+			      data <= 8'h7e;
+			   end
+			 else
+			   begin
+			      bitn <= bitn + 1;
+			      lfsr <= { lfsr[14:0], 1'b1 };
+			   end // else: !if(bitn == 15)
+		      end // if (!need_zero_insert)
 		 end
 
 	       CLOSING_FLAG:
