@@ -32,7 +32,9 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
    reg 	       frame_valid;
    wire	       idle;
 
-   assign dout[7:0] = byte[7:0];
+   reg [7:0]   rx_latch;
+
+   assign dout[7:0] = rx_latch[7:0];
 
    assign is_flag = (rx_shift[7:0] == 8'b01111110);
    assign is_abort = (rx_shift[7:1] == 7'b1111111);
@@ -70,6 +72,7 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 	     frame_complete <= 1'b0;
 	     frame_valid <= 1'b0;
 	     frame_abort <= 1'b0;
+	     rx_latch <= 8'hff;
 	  end
 	else
 	  begin
@@ -115,6 +118,7 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 			   frame_valid <= 1'b0;
 			   state <= IN_FRAME;
 			   bit <= 3'h0;
+			   rx_latch <= byte;
 			   byte_ready <= 1'b1;
 			end
 		      else
@@ -144,11 +148,12 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 			begin
 			   bit <= 3'h0;
 			   byte_ready <= 1'b1;
+			   rx_latch <= byte;
 			   frame_valid <= good_fcs;
 			end
 		      else
 			begin
-			   bit  <= bit + 1;
+			   bit <= bit + 1;
 			   byte_ready <= 1'b0;
 			end
 		   end // if (!is_stuffing)
