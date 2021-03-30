@@ -1,4 +1,4 @@
-module tx_top(netclk, reset, txdata, flag_fill, data_in[7:0], data_available, data_consumed, eop);
+module tx_framer(netclk, reset, txdata, flag_fill, data_in[7:0], data_available, data_consumed, eop);
 
    input netclk;
    input reset;
