@@ -1,7 +1,6 @@
-module tx_top(netclk, mclk, reset, txdata, flag_fill, data_in[7:0], data_available, data_consumed, eop);
+module tx_top(netclk, reset, txdata, flag_fill, data_in[7:0], data_available, data_consumed, eop);
 
    input netclk;
-   input mclk;
    input reset;
    input flag_fill;
 
