@@ -32,6 +32,8 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
    reg 	       frame_valid;
    wire	       idle;
 
+   assign dout[7:0] = byte[7:0];
+
    assign is_flag = (rx_shift[7:0] == 8'b01111110);
    assign is_abort = (rx_shift[7:1] == 7'b1111111);
    assign is_stuffing = ({ rxdata, rx_shift[7:3] } == 6'b011111);
