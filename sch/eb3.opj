@@ -1,0 +1,239 @@
+(ExpressProject "eb3"
+  (ProjectVersion "19981106")
+  (ProjectType "PCB")
+  (Folder "Design Resources"
+    (Folder "Library"
+      (File ".\library1.olb"
+        (Type "Schematic Library"))
+      (File "z:\eb\mem2075-00-140-01-a.olb"
+        (Type "Schematic Library")))
+    (NoModify)
+    (File ".\eb3.dsn"
+      (Type "Schematic Design"))
+    (BuildFileAddedOrDeleted "x")
+    (CompileFileAddedOrDeleted "x")
+    (DRC_Scope "0")
+    (DRC_Action "0")
+    (DRC_Create_Warnings "TRUE")
+    (DRC_View_Output "FALSE")
+    (DRC_Preserved_Waived "TRUE")
+    (DRC_Run_Electrical_Rules "TRUE")
+    (DRC_Run_Physical_Rules "TRUE")
+    (DRC_Report_File "H:\git\eb\eb3\EB3.DRC")
+    (DRC_Check_Ports "TRUE")
+    (DRC_Check_Off-Page_Connectors "TRUE")
+    (DRC_Report_Ports_and_Off-page_Connectors "TRUE")
+    (DRC_SDT_Compatibility "FALSE")
+    (DRC_Report_Off-grid_Objects "TRUE")
+    (DRC_Check_Unconnected_Nets "TRUE")
+    (DRC_Check_for_Misleading_TAP "TRUE")
+    (DRC_Report_Netnames "TRUE")
+    (DRC_Check_Single_Node_Nets "TRUE")
+    (DRC_Run_Electrical_Custom_DRC "FALSE")
+    (DRC_Check_No_Driving_Source "FALSE")
+    (DRC_Check_Duplicate_NetNames "TRUE")
+    (DRC_Check_Floating_Pins "TRUE")
+    (DRC_Check_Physical_Power_Pins_Visibility "TRUE")
+    (DRC_Check_PCB_Footprint_Property "TRUE")
+    (DRC_Check_Normal_Convert_View_Sync "TRUE")
+    (DRC_Check_Incorrect_PinGroup_Assignment "TRUE")
+    (DRC_Check_High_Speed_Props_Syntax "TRUE")
+    (DRC_Check_Missing_Pin_Numbers "TRUE")
+    (DRC_Check_Device_With_No_Pins "TRUE")
+    (DRC_Check_Power_Ground_Short "TRUE")
+    (DRC_Identical_References "TRUE")
+    (DRC_Type_Mismatch "TRUE")
+    (DRC_Visible_Power_pins "FALSE")
+    (DRC_Report_Unused_Part_Packages "TRUE")
+    (DRC_Check_Name_Prop_For_HierBlocks "TRUE")
+    (DRC_Run_Physical_Custom_DRC "FALSE")
+    ("Create Allegro Netlist" "TRUE")
+    ("Allegro Netlist Directory" "allegro")
+    ("View Allegro Netlist Files" "FALSE")
+    ("Allegro Netlist Create DCF File" "FALSE")
+    ("Update Allegro Board" "TRUE")
+    ("Allegro Netlist Output Board File" "EB3.brd")
+    ("Allegro Netlist Remove Etch" "FALSE")
+    ("Allegro Netlist Place Changed Component" "ALWAYS_REPLACE")
+    ("Allegro Netlist Open Board in Allegro" "ALLEGRO")
+    ("Allegro Setup Backup Versions" "3")
+    ("Allegro Setup Output Warnings" "TRUE")
+    ("Allegro Setup Ignore Constraints" "FALSE")
+    ("Allegro Setup Part Type Length" "31")
+    ("Allegro Netlist Combine Property String" "PCB Footprint")
+    ("Allegro Netlist Ignore Fixed Property" "FALSE")
+    ("Allegro Netlist User Defined Property" "FALSE")
+    (Netlist_TAB "0")
+    (ANNOTATE_Scope "0")
+    (ANNOTATE_Mode "1")
+    (ANNOTATE_Action "1")
+    (Annotate_Page_Order "0")
+    (ANNOTATE_Reset_References_to_1 "FALSE")
+    (ANNOTATE_No_Page_Number_Change "FALSE")
+    (ANNOTATE_Property_Combine
+       "{Value}{Source Package}{POWER_GROUP}{PartGroup}")
+    (ANNOTATE_IncludeNonPrimitive "FALSE")
+    (ANNOTATE_PreserveDesignator "FALSE")
+    (ANNOTATE_PreserveUserEdits "FALSE")
+    (ANNOTATE_Refdes_Control_Required "FALSE")
+    (Update_Instace_for_External_Design "FALSE")
+    (Annotate_type "Default")
+    (width_pages "100")
+    (width_start "80")
+    (width_End "80")
+    ("Allegro Netlist Input Board File" "EB3.brd")
+    (Board_sim_option "VHDL_flow"))
+  (Folder "Outputs"
+    (File ".\eb3.drc"
+      (Type "Report"))
+    (File ".\allegro\pstxnet.dat"
+      (Type "Report")
+      (DisplayName "pstxnet.dat"))
+    (File ".\allegro\pstxprt.dat"
+      (Type "Report")
+      (DisplayName "pstxprt.dat"))
+    (File ".\allegro\pstchip.dat"
+      (Type "Report")
+      (DisplayName "pstchip.dat")))
+  (Folder "Referenced Projects")
+  (PartMRUSelector
+    (DS34C87TMNOPB
+      (FullPartName "DS34C87TMNOPB.Normal")
+      (LibraryName "H:\GIT\EB\EB3\ALLEGRO\2021-02-27_11-12-57.OLB")
+      (DeviceIndex "0"))
+    (RES
+      (FullPartName "RES.Normal")
+      (LibraryName
+         "\\REPTON\PRIVATE\ELECTRONICS\ORCAD LIBRARIES\SCHEMATIC_SYMBOLS\RESISTORS.OLB")
+      (DeviceIndex "0"))
+    (OFFPAGELEFT-R
+      (LibraryName "C:\CADENCE\SPB_16.6\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (OFFPAGELEFT-L
+      (LibraryName "C:\CADENCE\SPB_16.6\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    ("SW PUSHBUTTON_4"
+      (FullPartName "SW PUSHBUTTON_4.Normal")
+      (LibraryName
+         "\\REPTON\PRIVATE\ELECTRONICS\ORCAD LIBRARIES\SCHEMATIC_SYMBOLS\MASTER LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (MMBT3904/SOT_1
+      (FullPartName "MMBT3904/SOT_1.Normal")
+      (LibraryName
+         "\\REPTON\PRIVATE\ELECTRONICS\ORCAD LIBRARIES\SCHEMATIC_SYMBOLS\MASTER LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (GND
+      (LibraryName "C:\CADENCE\SPB_16.6\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (VCC_BAR
+      (LibraryName "C:\CADENCE\SPB_16.6\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (75159
+      (FullPartName "75159.Normal")
+      (LibraryName "C:\EB3\LIBRARY1.OLB")
+      (DeviceIndex "0"))
+    (LED
+      (FullPartName "LED.Normal")
+      (LibraryName
+         "\\REPTON\PRIVATE\ELECTRONICS\ORCAD LIBRARIES\SCHEMATIC_SYMBOLS\MASTER LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (TPS71710-SO5_5
+      (FullPartName "TPS71710-SO5_5.Normal")
+      (LibraryName
+         "\\REPTON\PRIVATE\ELECTRONICS\ORCAD LIBRARIES\SCHEMATIC_SYMBOLS\MASTER LIBRARY.OLB")
+      (DeviceIndex "0"))
+    ("GND POWER"
+      (LibraryName "C:\PROGRAM FILES\ORCADWIN\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (XTAL
+      (FullPartName "XTAL.Normal")
+      (LibraryName
+         "\\REPTON\PRIVATE\ELECTRONICS\ORCAD LIBRARIES\SCHEMATIC_SYMBOLS\MASTER LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (IND-SHIELDED_0
+      (FullPartName "IND-SHIELDED_0.Normal")
+      (LibraryName
+         "\\REPTON\PRIVATE\ELECTRONICS\ORCAD LIBRARIES\SCHEMATIC_SYMBOLS\MASTER LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (CAP
+      (FullPartName "CAP.Normal")
+      (LibraryName
+         "\\REPTON\PRIVATE\ELECTRONICS\ORCAD LIBRARIES\SCHEMATIC_SYMBOLS\CAPACITORS.OLB")
+      (DeviceIndex "0"))
+    (KSZ8081RNB
+      (FullPartName "KSZ8081RNB.Normal")
+      (LibraryName
+         "\\REPTON\PRIVATE\ELECTRONICS\ORCAD LIBRARIES\SCHEMATIC_SYMBOLS\MASTER LIBRARY.OLB")
+      (DeviceIndex "0"))
+    (ATSAME53N19A-AU
+      (FullPartName "ATSAME53N19A-AU.Normal")
+      (LibraryName
+         "\\REPTON\PRIVATE\ELECTRONICS\ORCAD LIBRARIES\SCHEMATIC_SYMBOLS\MASTER LIBRARY.OLB")
+      (DeviceIndex "0")))
+  (GlobalState
+    (FileView
+      (Path "Design Resources")
+      (Path "Design Resources" "h:\git\eb\eb3\eb3.dsn")
+      (Path "Design Resources" "h:\git\eb\eb3\eb3.dsn" "SCHEMATIC1")
+      (Path "Design Resources" "Library")
+      (Path "Outputs")
+      (Select "Design Resources" "h:\git\eb\eb3\eb3.dsn" "SCHEMATIC1" "FPGA"))
+    (HierarchyView)
+    (Doc
+      (Type "COrCapturePMDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 0 245 0 391"))
+      (Tab 0))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 104 1228 104 384")
+        (Scroll "0 0")
+        (Zoom "100")
+        (Occurrence "/"))
+      (Path "H:\GIT\EB\EB3\EB3.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "LINE"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 130 878 130 499")
+        (Scroll "0 70")
+        (Zoom "100")
+        (Occurrence "/"))
+      (Path "H:\GIT\EB\EB3\EB3.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "CPU"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 156 908 156 529")
+        (Scroll "0 260")
+        (Zoom "100")
+        (Occurrence "/"))
+      (Path "H:\GIT\EB\EB3\EB3.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "POWER"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 0 752 0 373")
+        (Scroll "0 220")
+        (Zoom "100")
+        (Occurrence "/"))
+      (Path "H:\GIT\EB\EB3\EB3.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "ETH"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -1 -1 0 1042 0 369")
+        (Scroll "468 251")
+        (Zoom "100")
+        (Occurrence "/"))
+      (Path "H:\GIT\EB\EB3\EB3.DSN")
+      (Schematic "SCHEMATIC1")
+      (Page "FPGA")))
+  (ISPCBBASICLICENSE "false")
+  (MPSSessionName "pb")
+  (LastUsedLibraryBrowseDirectory "H:\git\eb\eb3\allegro"))
