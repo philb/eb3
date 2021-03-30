@@ -67,6 +67,7 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 	     rx_shift <= 7'b1111111;
 	     frame_complete <= 1'b0;
 	     frame_valid <= 1'b0;
+	     frame_abort <= 1'b0;
 	  end
 	else
 	  begin
@@ -82,9 +83,11 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 		      byte_ready <= 1'b0;
 		      frame_complete <= 1'b0;
 		      frame_valid <= 1'b0;
+		      frame_abort <= 1'b0;
 		   end
 		 else
 		   begin
+		      frame_abort <= 1'b0;
 		      state <= HUNT;
 		   end
 
