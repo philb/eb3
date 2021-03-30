@@ -94,6 +94,7 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in[7:0], data_available,
 		      end
 		    else
 		      begin
+			 data_consumed <= 1'b0;
 			 bitn <= bitn + 1;
 			 data <= { 1'b1, data[7:1] };
 		      end
@@ -118,7 +119,7 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in[7:0], data_available,
 			      else if (!eop)
 				begin
 				   state <= CLOSING_FLAG;
-				   data <= 8'hff;
+				   data <= 8'hff;  // underrun, send abort
 				end
 			      else
 				begin
@@ -127,6 +128,7 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in[7:0], data_available,
 			   end
 			 else
 			   begin
+			      data_consumed <= 1'b0;
 			      bitn <= bitn + 1;
 			      data <= { 1'b1, data[7:1] };
 			   end // else: !if(bitn == 7)
@@ -135,6 +137,7 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in[7:0], data_available,
 
 	       FCS:
 		 begin
+		    data_consumed <= 1'b0;
 		    out_bits <= { txdata, out_bits[4:1] };
 
 		    if (!need_zero_insert)
