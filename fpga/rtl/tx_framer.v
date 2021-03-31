@@ -10,13 +10,13 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in[7:0], data_available,
    input 	 eop;
    output 	 underrun; 	 
 
-   reg [2:0] 	 state;
+   reg [4:0] 	 state;
 
-   parameter IDLE = 3'b000;
-   parameter OPENING_FLAG = 3'b001;
-   parameter IN_FRAME = 3'b010;
-   parameter FCS = 3'b011;
-   parameter CLOSING_FLAG = 3'b100;
+   parameter IDLE = 5'b00001;
+   parameter OPENING_FLAG = 5'b00010;
+   parameter IN_FRAME = 5'b00100;
+   parameter FCS = 5'b01000;
+   parameter CLOSING_FLAG = 5'b10000;
 
    wire [15:0] 	 new_crc;
    reg [15:0] 	 lfsr;
