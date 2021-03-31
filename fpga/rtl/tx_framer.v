@@ -19,7 +19,6 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in[7:0], data_available,
    parameter CLOSING_FLAG = 3'b100;
 
    wire [15:0] 	 new_crc;
-   wire [15:0] 	 not_crc;
    reg [15:0] 	 lfsr;
 
    wire 	 need_zero_insert;
@@ -48,8 +47,6 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in[7:0], data_available,
    assign new_crc[13] = lfsr[12];
    assign new_crc[14] = lfsr[13];
    assign new_crc[15] = lfsr[14];
-
-   assign not_crc[15:0] = lfsr[15:0] ^ 16'hffff;
 
    assign need_zero_insert = (state == IN_FRAME) && (out_bits[4:0] == 5'b11111);
    assign txdata = need_zero_insert ? 1'b0 : ((state == IDLE) ? 1'b1 : ((state == FCS) ? !lfsr[15] : data[0]));
