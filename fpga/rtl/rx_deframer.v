@@ -9,7 +9,7 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
    output       byte_ready;
    output [7:0] dout;
 
-   reg [1:0] 	state;
+   reg [2:0] 	state;
 
    wire [15:0] 	fcs;
 
@@ -32,9 +32,9 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
    wire 	good_fcs;
 
    // state definitions
-   parameter HUNT = 2'b00;
-   parameter START_FRAME = 2'b01;
-   parameter IN_FRAME = 2'b10;
+   parameter HUNT = 3'b001;
+   parameter START_FRAME = 3'b010;
+   parameter IN_FRAME = 3'b100;
 
    assign dout[7:0] = rx_latch[7:0];
 
