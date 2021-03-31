@@ -15,8 +15,9 @@ module top;
    reg 	clken;
    reg 	eop;
 
-   tx_framer TX(clk & clken, reset, txdata, flag_fill, data, data_available, data_consumed, eop);
+   tx_framer TX(clk & clken, reset, txdata, flag_fill, data, data_available, data_consumed, eop, underrun);
 
+   wire underrun;
    wire frame_complete;
    wire abort;
    wire idle;
