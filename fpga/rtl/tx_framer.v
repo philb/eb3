@@ -1,11 +1,13 @@
 module tx_framer(netclk, reset, txdata, flag_fill, data_in[7:0], data_available, data_consumed, eop);
 
-   input netclk;
-   input reset;
-   input flag_fill;
-
-   output txdata;
+   input         netclk;
+   input 	 reset;
+   output 	 txdata;
+   input 	 flag_fill;
+   input [7:0]   data_in;
+   input 	 data_available;
    output        data_consumed;
+   input 	 eop;
 
    reg [2:0] state;
 
@@ -45,10 +47,7 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in[7:0], data_available,
    reg [4:0]   bitn;
    reg [4:0]   out_bits;
 
-   input [7:0]   data_in;
-   input 	 data_available;
    reg 		 data_consumed;
-   input 	 eop;
 
    assign need_zero_insert = (state == IN_FRAME) && (out_bits[4:0] == 5'b11111);
    assign txdata = need_zero_insert ? 1'b0 : ((state == IDLE) ? 1'b1 : ((state == FCS) ? !lfsr[15] : data[0]));
