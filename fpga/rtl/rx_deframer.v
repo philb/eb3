@@ -1,38 +1,40 @@
 module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, frame_valid, byte_ready, dout);
-
-   input netclk;
-   input reset;
-   input rxdata;
-   output frame_abort;
-   output idle;
-   output frame_complete;
-   output frame_valid;
-   output byte_ready;
+   input 	netclk;
+   input 	reset;
+   input 	rxdata;
+   output 	frame_abort;
+   output 	idle;
+   output 	frame_complete;
+   output       frame_valid;
+   output       byte_ready;
    output [7:0] dout;
 
-   reg [1:0]  state;
+   reg [1:0] 	state;
 
+   wire [15:0] 	fcs;
+
+   wire 	is_flag;
+   wire 	is_abort;
+   wire 	is_stuffing;
+   wire [15:0] 	new_crc;
+   reg [15:0] 	lfsr;
+   reg [7:0] 	rx_shift;
+   reg [7:0] 	byte;
+   reg [3:0] 	bit;
+   reg 		byte_ready;
+   reg 		frame_abort;
+   reg 		frame_complete;
+   reg 		frame_valid;
+   wire 	idle;
+
+   reg [7:0] 	rx_latch;
+
+   wire 	good_fcs;
+
+   // state definitions
    parameter HUNT = 2'b00;
    parameter START_FRAME = 2'b01;
    parameter IN_FRAME = 2'b10;
-
-   wire [15:0] fcs;
-
-   wire is_flag;
-   wire is_abort;
-   wire is_stuffing;
-   wire [15:0] new_crc;
-   reg [15:0]  lfsr;
-   reg [7:0]   rx_shift;
-   reg [7:0]   byte;
-   reg [3:0]   bit;
-   reg 	       byte_ready;
-   reg 	       frame_abort;
-   reg 	       frame_complete;
-   reg 	       frame_valid;
-   wire	       idle;
-
-   reg [7:0]   rx_latch;
 
    assign dout[7:0] = rx_latch[7:0];
 
@@ -57,8 +59,6 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
    assign new_crc[13] = lfsr[12];
    assign new_crc[14] = lfsr[13];
    assign new_crc[15] = lfsr[14];
-
-   wire        good_fcs;
 
    assign good_fcs = (new_crc[15:0] == 16'h1d0f);
 
