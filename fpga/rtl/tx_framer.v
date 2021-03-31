@@ -10,7 +10,7 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in[7:0], data_available,
    input 	 eop;
    output 	 underrun; 	 
 
-   reg [2:0] state;
+   reg [2:0] 	 state;
 
    parameter IDLE = 3'b000;
    parameter OPENING_FLAG = 3'b001;
@@ -18,11 +18,19 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in[7:0], data_available,
    parameter FCS = 3'b011;
    parameter CLOSING_FLAG = 3'b100;
 
-   wire [15:0] new_crc;
-   reg [15:0]  lfsr;
+   wire [15:0] 	 new_crc;
+   wire [15:0] 	 not_crc;
+   reg [15:0] 	 lfsr;
 
-   wire        need_zero_insert;
-   wire        txdata;
+   wire 	 need_zero_insert;
+   wire 	 txdata;
+
+   reg [7:0] 	 data;
+   reg [4:0] 	 bitn;
+   reg [4:0] 	 out_bits;
+   
+   reg 		 data_consumed;
+   reg 		 underrun;
 
    assign new_crc[0]  = txdata ^ lfsr[15];
    assign new_crc[1]  = lfsr[0];
@@ -41,15 +49,7 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in[7:0], data_available,
    assign new_crc[14] = lfsr[13];
    assign new_crc[15] = lfsr[14];
 
-   wire    [15:0]    not_crc;
    assign not_crc[15:0] = lfsr[15:0] ^ 16'hffff;
-
-   reg [7:0]   data;
-   reg [4:0]   bitn;
-   reg [4:0]   out_bits;
-
-   reg 		 data_consumed;
-   reg 		 underrun;
 
    assign need_zero_insert = (state == IN_FRAME) && (out_bits[4:0] == 5'b11111);
    assign txdata = need_zero_insert ? 1'b0 : ((state == IDLE) ? 1'b1 : ((state == FCS) ? !lfsr[15] : data[0]));
