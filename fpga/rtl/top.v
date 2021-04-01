@@ -1,27 +1,27 @@
 module top (mclk, netclk, txdata, rxdata, txen, irq, no_clock, idle, sck, mosi, miso, ss, sck_m, mosi_m, miso_m, ss_m, usart0, usart1, usart2, usart3, reset, flag_fill, tx_error);
-   input mclk;
-   input netclk;
-   output txdata;
-   input  rxdata;
-   output txen;
-   output irq;
-   output no_clock;
-   output idle;
-   input  ss;
-   input sck;
-   input mosi;
-   output miso;
+   input       mclk;
+   input       netclk;
+   output      txdata;
+   input       rxdata;
+   output      txen;
+   output      irq;
+   output      no_clock;
+   output      idle;
+   input       ss;
+   input       sck;
+   input       mosi;
+   output      miso;
 
-   output sck_m;
-   output mosi_m;
-   input  miso_m;
-   output ss_m;
+   output      sck_m;
+   output      mosi_m;
+   input       miso_m;
+   output      ss_m;
 
-   input  usart0;
-   input  usart1;
-   input  usart2;
-   input  usart3;
-   input  reset;		// FPGA2_SCK
+   input       usart0;
+   input       usart1;
+   input       usart2;
+   input       usart3;
+   input       reset;		// FPGA2_SCK
 
    input       flag_fill;
 
