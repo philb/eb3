@@ -1,10 +1,10 @@
 module tx_top(clk, netclk, reset, txdata, flag_fill, spi_data[15:0], spi_data_request, spi_data_strobe, go, underrun, overrun);
-   input  clk;
-   input  netclk;
-   input  reset;
-   output txdata;
-
-   input  flag_fill;
+   input        clk;
+   input 	netclk;
+   input 	reset;
+   output 	txdata;
+   
+   input 	flag_fill;
 
    input [15:0] spi_data;
    input 	spi_data_strobe;
