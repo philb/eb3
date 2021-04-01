@@ -1,4 +1,4 @@
-module tx_top(clk, netclk, reset, txdata, flag_fill, spi_data[15:0], spi_data_request, spi_data_strobe, go, underflow, overflow);
+module tx_top(clk, netclk, reset, txdata, flag_fill, spi_data[15:0], spi_data_request, spi_data_strobe, go, underrun, overrun);
    input  clk;
    input  netclk;
    input  reset;
@@ -11,13 +11,13 @@ module tx_top(clk, netclk, reset, txdata, flag_fill, spi_data[15:0], spi_data_re
    output 	spi_data_request;
 
    input 	go;
-   output 	underflow;
-   output 	overflow;
+   output 	underrun;
+   output 	overrun;
 
    reg [7:0] 	thr;
    reg 		thr_full;
    wire 	thr_consumed;
-   reg 		overflow;
+   reg 		overrun;
 
    reg 		eop;
 
@@ -32,7 +32,7 @@ module tx_top(clk, netclk, reset, txdata, flag_fill, spi_data[15:0], spi_data_re
 	     thr_full <= 1'b0;
 	     was_spi_data_strobe <= 1'b0;
 	     spi_data_request <= 1'b0;
-	     overflow <= 1'b0;
+	     overrun <= 1'b0;
 	  end
 	else
 	  begin
@@ -45,7 +45,7 @@ module tx_top(clk, netclk, reset, txdata, flag_fill, spi_data[15:0], spi_data_re
 		    begin
 		       if (thr_full)
 			 begin
-			    overflow <= 1'b1;
+			    overrun <= 1'b1;
 			 end
 		       thr[7:0] <= spi_data[7:0];
 		       thr_full <= 1'b1;
