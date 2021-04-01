@@ -55,9 +55,8 @@ module spi_master(clk, reset, rx_data, rx_strobe, rx_accept, tx_request, tx_data
    reg [15:0] 	 tx_reg;   
    
    reg [2:0] 	 state;
-   reg [4:0] 	 bit;
+   reg [3:0] 	 bit;
 
-   reg [2:0] 	 clk_divider;
    reg 		 sck;
    reg 		 mosi;	
    reg 		 ss;

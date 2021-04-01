@@ -11,8 +11,6 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 
    reg [2:0] 	state;
 
-   wire [15:0] 	fcs;
-
    wire 	is_flag;
    wire 	is_abort;
    wire 	is_stuffing;
@@ -20,7 +18,7 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
    reg [15:0] 	lfsr;
    reg [7:0] 	rx_shift;
    reg [7:0] 	byte;
-   reg [3:0] 	bit;
+   reg [2:0] 	bit;
    reg 		byte_ready;
    reg 		frame_abort;
    reg 		frame_complete;
