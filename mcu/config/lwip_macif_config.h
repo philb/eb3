@@ -11,7 +11,7 @@
 // <i> Set by the DHCP code when starting or stopping DHCP.
 // <id> macif_dhcp
 #ifndef CONF_TCPIP_STACK_INTERFACE_0_DHCP
-#define CONF_TCPIP_STACK_INTERFACE_0_DHCP 0
+#define CONF_TCPIP_STACK_INTERFACE_0_DHCP 1
 #endif
 
 // <q> Enable Broadcast
@@ -62,7 +62,7 @@
 // <i> the hostname for this ethernet interface
 // <id> macif_hostname
 #ifndef CONF_TCPIP_STACK_INTERFACE_0_HOSTNAME
-#define CONF_TCPIP_STACK_INTERFACE_0_HOSTNAME "lwip"
+#define CONF_TCPIP_STACK_INTERFACE_0_HOSTNAME "eb3"
 #endif
 
 // <s> Host Name descriptive abbreviation
@@ -83,27 +83,6 @@
 
 #if CONF_TCPIP_STACK_INTERFACE_0_DHCP == 1 && CONF_TCPIP_STACK_INTERFACE_0_STATIC_IP == 1
 #warning The Static IP Address setting will not setup since DHCP already enabled
-#endif
-
-// <s> IP Address
-// <i> Static IP address
-// <id> macif_ip
-#ifndef CONF_TCPIP_STACK_INTERFACE_0_IP
-#define CONF_TCPIP_STACK_INTERFACE_0_IP "192.168.1.100"
-#endif
-
-// <s> Netmask Address
-// <i> Netmask Address
-// <id> macif_netmask
-#ifndef CONF_TCPIP_STACK_INTERFACE_0_NETMASK
-#define CONF_TCPIP_STACK_INTERFACE_0_NETMASK "255.255.255.0"
-#endif
-
-// <s> Gateway Address
-// <i> Static Gateway Address
-// <id> macif_gateway
-#ifndef CONF_TCPIP_STACK_INTERFACE_0_GATEWAY
-#define CONF_TCPIP_STACK_INTERFACE_0_GATEWAY "192.168.1.1"
 #endif
 
 // </e>
