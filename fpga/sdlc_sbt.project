@@ -4,7 +4,7 @@ Version=Lattice Semiconductor Corporation iCEcube - Release: 2020.12.27943 - Bui
 ProjectName=sdlc
 Vendor=SiliconBlue
 Synthesis=synplify
-ProjectVFiles=rtl/rx_top.v,rtl/top.v
+ProjectVFiles=rtl/rx_top.v=work,rtl/top.v=work,rtl/tx_top.v=work,rtl/rx_deframer.v=work,rtl/spi_master.v=work,rtl/tx_framer.v=work,rtl/clock_detect.v=work
 ProjectCFiles=
 CurImplementation=sdlc_Implmnt
 Implementations=sdlc_Implmnt
@@ -52,7 +52,7 @@ DesignCell=top
 SynthesisSDCFile=sdlc_Implmnt/sdlc.scf
 UserPinConstraintFile=
 UserSDCFile=
-PhysicalConstraintFile=
+PhysicalConstraintFile=sdlc_Implmnt/sbt/constraint/top_pcf_sbt.pcf
 BackendImplPathName=
 Devicevoltage=1.14
 DevicevoltagePerformance=+/-5%(datasheet default)

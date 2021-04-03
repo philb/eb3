@@ -4,6 +4,11 @@
 
 add_file -verilog -lib work "rtl/rx_top.v" 
 add_file -verilog -lib work "rtl/top.v" 
+add_file -verilog -lib work "rtl/tx_top.v" 
+add_file -verilog -lib work "rtl/rx_deframer.v" 
+add_file -verilog -lib work "rtl/spi_master.v" 
+add_file -verilog -lib work "rtl/tx_framer.v" 
+add_file -verilog -lib work "rtl/clock_detect.v" 
 #implementation: "sdlc_Implmnt"
 impl -add sdlc_Implmnt -type fpga
 
