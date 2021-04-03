@@ -7,7 +7,6 @@ extern "C" {
 
 #include "driver_init.h"
 #include "ethernet_phy_main.h"
-#include "tcpip_lite_start.h"
 #include "eth_ipstack_main.h"
 #include "usb_start.h"
 

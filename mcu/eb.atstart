@@ -19,6 +19,71 @@ board:
 details: null
 application: null
 middlewares:
+  USB_CHAPTER_9:
+    user_label: USB_CHAPTER_9
+    configuration: {}
+    definition: Atmel:USB:0.0.1::USB_Chapter_9
+    functionality: USB_Chapter_9
+    api: USB:Protocol:Core
+    dependencies: {}
+  USB_CLASS_VENDOR:
+    user_label: USB_CLASS_VENDOR
+    configuration: {}
+    definition: Atmel:USB:0.0.1::USB_Class_VENDOR
+    functionality: USB_Class_VENDOR
+    api: USB:Protocol:VENDOR
+    dependencies:
+      USB Chapter 9: USB_CHAPTER_9
+  USB_DEVICE_STACK_CORE_INSTANCE:
+    user_label: USB_DEVICE_STACK_CORE_INSTANCE
+    configuration:
+      usbd_hs_sp: false
+    definition: Atmel:USB:0.0.1::USB_Device_Core
+    functionality: USB_Device_Core
+    api: USB:Device:Core
+    dependencies:
+      USB Chapter 9: USB_CHAPTER_9
+      USB Device instance: USB_0
+  USB_DEVICE_VENDOR_0:
+    user_label: USB_DEVICE_VENDOR_0
+    configuration:
+      usb_vendor_bcddevice: 256
+      usb_vendor_bcdusb: USB 2.0 version
+      usb_vendor_bifcnum: 0
+      usb_vendor_bmattri: Bus power supply, not support for remote wakeup
+      usb_vendor_bmaxpksz0: 64 bytes
+      usb_vendor_bmaxpower: 50
+      usb_vendor_bulkin_epaddr: EndpointAddress = 0x83
+      usb_vendor_bulkin_maxpksz: 64 bytes
+      usb_vendor_bulkout_epaddr: EndpointAddress = 0x04
+      usb_vendor_bulkout_maxpksz: 64 bytes
+      usb_vendor_iconfig_en: false
+      usb_vendor_iconfig_str: ''
+      usb_vendor_idproduct: 9251
+      usb_vendor_idvender: 1003
+      usb_vendor_iifc: 0
+      usb_vendor_imanufact_en: false
+      usb_vendor_imanufact_str: Atmel
+      usb_vendor_intin_epaddr: EndpointAddress = 0x81
+      usb_vendor_intin_maxpksz: 64 bytes
+      usb_vendor_intout_epaddr: EndpointAddress = 0x02
+      usb_vendor_intout_maxpksz: 64 bytes
+      usb_vendor_iproduct_en: false
+      usb_vendor_iproduct_str: Vendor Class Demo
+      usb_vendor_iserialnum_en: false
+      usb_vendor_iserialnum_str: 123456789ABCDEF
+      usb_vendor_isoin_epaddr: EndpointAddress = 0x85
+      usb_vendor_isoin_maxpksz: 256 bytes
+      usb_vendor_isoout_epaddr: EndpointAddress = 0x06
+      usb_vendor_isoout_maxpksz: 256 bytes
+      usb_vendor_langid: '0x0409'
+      usb_vendor_str_en: false
+    definition: Atmel:USB:0.0.1::USB_Device_Vendor
+    functionality: USB_Device_VENDOR
+    api: USB:Device:VENDOR
+    dependencies:
+      USB Class VENDOR: USB_CLASS_VENDOR
+      USB Device Stack Core Instance: USB_DEVICE_STACK_CORE_INSTANCE
   ETHERNET_PHY_0:
     user_label: ETHERNET_PHY_0
     configuration:
@@ -35,29 +100,6 @@ middlewares:
     api: Ethernet:GenericPHY:Driver
     dependencies:
       Communication IO: ETHERNET_MAC_0
-  TCPIP_STACK_0:
-    user_label: TCPIP_STACK_0
-    configuration:
-      arp_map_size: 8
-      dhcp_name: MCHP ETHERNET
-      dhcp_name_size: 13
-      enable_ip_debug: false
-      enable_net_debug: false
-      enable_syslog_debug: false
-      enable_tcp_debug: false
-      enable_udp_demo: false
-      ipv4_ttl: 64
-      local_tcp_port_end_number: 65535
-      local_tcp_port_start_number: 1024
-      tcp_max_retries: 5
-      tcp_max_seg_size: 1460
-      tcp_max_syn_retries: 3
-      tick_second: 1
-    definition: Microchip:TCPIPLite:1.0.0::TCPIP_Lite
-    functionality: TCP/IP_Stack
-    api: Ethernet:IPStack:Lite
-    dependencies:
-      Timer: Timer
   TCPIP_STACK:
     user_label: TCPIP_STACK
     configuration:
@@ -186,71 +228,6 @@ middlewares:
     dependencies:
       Communication IO: ETHERNET_MAC_0
       TCP/IP Stack: TCPIP_STACK
-  USB_CHAPTER_9:
-    user_label: USB_CHAPTER_9
-    configuration: {}
-    definition: Atmel:USB:0.0.1::USB_Chapter_9
-    functionality: USB_Chapter_9
-    api: USB:Protocol:Core
-    dependencies: {}
-  USB_CLASS_VENDOR:
-    user_label: USB_CLASS_VENDOR
-    configuration: {}
-    definition: Atmel:USB:0.0.1::USB_Class_VENDOR
-    functionality: USB_Class_VENDOR
-    api: USB:Protocol:VENDOR
-    dependencies:
-      USB Chapter 9: USB_CHAPTER_9
-  USB_DEVICE_STACK_CORE_INSTANCE:
-    user_label: USB_DEVICE_STACK_CORE_INSTANCE
-    configuration:
-      usbd_hs_sp: false
-    definition: Atmel:USB:0.0.1::USB_Device_Core
-    functionality: USB_Device_Core
-    api: USB:Device:Core
-    dependencies:
-      USB Chapter 9: USB_CHAPTER_9
-      USB Device instance: USB_0
-  USB_DEVICE_VENDOR_0:
-    user_label: USB_DEVICE_VENDOR_0
-    configuration:
-      usb_vendor_bcddevice: 256
-      usb_vendor_bcdusb: USB 2.0 version
-      usb_vendor_bifcnum: 0
-      usb_vendor_bmattri: Bus power supply, not support for remote wakeup
-      usb_vendor_bmaxpksz0: 64 bytes
-      usb_vendor_bmaxpower: 50
-      usb_vendor_bulkin_epaddr: EndpointAddress = 0x83
-      usb_vendor_bulkin_maxpksz: 64 bytes
-      usb_vendor_bulkout_epaddr: EndpointAddress = 0x04
-      usb_vendor_bulkout_maxpksz: 64 bytes
-      usb_vendor_iconfig_en: false
-      usb_vendor_iconfig_str: ''
-      usb_vendor_idproduct: 9251
-      usb_vendor_idvender: 1003
-      usb_vendor_iifc: 0
-      usb_vendor_imanufact_en: false
-      usb_vendor_imanufact_str: Atmel
-      usb_vendor_intin_epaddr: EndpointAddress = 0x81
-      usb_vendor_intin_maxpksz: 64 bytes
-      usb_vendor_intout_epaddr: EndpointAddress = 0x02
-      usb_vendor_intout_maxpksz: 64 bytes
-      usb_vendor_iproduct_en: false
-      usb_vendor_iproduct_str: Vendor Class Demo
-      usb_vendor_iserialnum_en: false
-      usb_vendor_iserialnum_str: 123456789ABCDEF
-      usb_vendor_isoin_epaddr: EndpointAddress = 0x85
-      usb_vendor_isoin_maxpksz: 256 bytes
-      usb_vendor_isoout_epaddr: EndpointAddress = 0x06
-      usb_vendor_isoout_maxpksz: 256 bytes
-      usb_vendor_langid: '0x0409'
-      usb_vendor_str_en: false
-    definition: Atmel:USB:0.0.1::USB_Device_Vendor
-    functionality: USB_Device_VENDOR
-    api: USB:Device:VENDOR
-    dependencies:
-      USB Class VENDOR: USB_CLASS_VENDOR
-      USB Device Stack Core Instance: USB_DEVICE_STACK_CORE_INSTANCE
 drivers:
   DIGITAL_GLUE_LOGIC_0:
     user_label: DIGITAL_GLUE_LOGIC_0

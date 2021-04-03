@@ -33,7 +33,6 @@ SUB_DIRS +=  \
 hpl/ramecc \
 hpl/gmac \
 ethernet_phy \
-tcpip_lite/source \
 examples \
 hpl/oscctrl \
 hpl/sdhc \
@@ -83,7 +82,6 @@ lwip/lwip-1.4.0/src/netif/ppp/magic.o \
 lwip/lwip-1.4.0/src/api/netbuf.o \
 lwip/lwip-1.4.0/src/core/sys.o \
 hal/src/hal_usart_sync.o \
-tcpip_lite/source/ipv4.o \
 hpl/ramecc/hpl_ramecc.o \
 ethernet_phy/ethernet_phy.o \
 lwip/lwip-1.4.0/src/netif/ppp/randm.o \
@@ -95,12 +93,10 @@ gcc/gcc/startup_same53.o \
 hal/src/hal_gpio.o \
 lwip/lwip-1.4.0/src/netif/ppp/chap.o \
 lwip/lwip-1.4.0/src/netif/ppp/md5.o \
-tcpip_lite/source/dhcp_client.o \
 lwip/lwip-1.4.0/src/core/timers.o \
 lwip/lwip-1.4.0/src/api/err.o \
 lwip/lwip-1.4.0/src/api/api_msg.o \
 hpl/eic/hpl_eic.o \
-tcpip_lite/source/mac_address.o \
 lwip/lwip-1.4.0/src/core/tcp_out.o \
 lwip/lwip-1.4.0/src/core/ipv4/ip_frag.o \
 hpl/mclk/hpl_mclk.o \
@@ -129,7 +125,6 @@ hal/src/hal_atomic.o \
 lwip/lwip-1.4.0/src/core/dhcp.o \
 hal/src/hal_io.o \
 gcc/system_same53.o \
-tcpip_lite/source/icmp.o \
 lwip/lwip-1.4.0/src/netif/ppp/fsm.o \
 hpl/wdt/hpl_wdt.o \
 lwip/lwip-1.4.0/src/netif/ppp/ppp_oe.o \
@@ -152,7 +147,6 @@ lwip/lwip-1.4.0/src/netif/slipif.o \
 hal/src/hal_init.o \
 lwip/lwip-1.4.0/src/netif/ppp/vj.o \
 examples/driver_examples.o \
-tcpip_lite/source/network.o \
 hpl/sercom/hpl_sercom.o \
 hal/src/hal_sleep.o \
 lwip/lwip-1.4.0/src/core/init.o \
@@ -160,10 +154,8 @@ hal/src/hal_mac_async.o \
 usb/device/usbdc.o \
 hpl/tc/hpl_tc.o \
 lwip/lwip-1.4.0/src/core/dns.o \
-tcpip_lite/source/arpv4.o \
 hpl/pac/hpl_pac.o \
 hpl/gmac/hpl_gmac.o \
-tcpip_lite/source/udpv4.o \
 lwip/lwip-1.4.0/src/core/snmp/asn1_dec.o \
 hal/src/hal_pac.o \
 lwip/lwip-1.4.0/src/netif/ppp/ipcp.o \
@@ -178,15 +170,12 @@ lwip/lwip-1.4.0/src/netif/ppp/ppp.o \
 lwip/lwip-1.4.0/src/core/tcp_in.o \
 hal/utils/src/utils_assert.o \
 lwip/lwip-1.4.0/src/core/ipv4/ip_addr.o \
-tcpip_lite_start.o \
-tcpip_lite/source/tcpv4.o \
 lwip/lwip-1.4.0/src/core/snmp/mib_structs.o \
 main.o \
 lwip/lwip-1.4.0/src/core/ipv4/inet.o \
 lwip/lwip-1.4.0/src/api/netifapi.o \
 lwip/lwip-1.4.0/src/netif/ppp/auth.o \
 lwip/lwip-1.4.0/src/api/sockets.o \
-tcpip_lite/source/syslog.o \
 lwip/lwip-1.4.0/src/core/netif.o \
 hal/src/hal_cache.o \
 lwip/lwip-1.4.0/src/api/tcpip.o
@@ -205,7 +194,6 @@ OBJS_AS_ARGS +=  \
 "lwip/lwip-1.4.0/src/api/netbuf.o" \
 "lwip/lwip-1.4.0/src/core/sys.o" \
 "hal/src/hal_usart_sync.o" \
-"tcpip_lite/source/ipv4.o" \
 "hpl/ramecc/hpl_ramecc.o" \
 "ethernet_phy/ethernet_phy.o" \
 "lwip/lwip-1.4.0/src/netif/ppp/randm.o" \
@@ -217,12 +205,10 @@ OBJS_AS_ARGS +=  \
 "hal/src/hal_gpio.o" \
 "lwip/lwip-1.4.0/src/netif/ppp/chap.o" \
 "lwip/lwip-1.4.0/src/netif/ppp/md5.o" \
-"tcpip_lite/source/dhcp_client.o" \
 "lwip/lwip-1.4.0/src/core/timers.o" \
 "lwip/lwip-1.4.0/src/api/err.o" \
 "lwip/lwip-1.4.0/src/api/api_msg.o" \
 "hpl/eic/hpl_eic.o" \
-"tcpip_lite/source/mac_address.o" \
 "lwip/lwip-1.4.0/src/core/tcp_out.o" \
 "lwip/lwip-1.4.0/src/core/ipv4/ip_frag.o" \
 "hpl/mclk/hpl_mclk.o" \
@@ -251,7 +237,6 @@ OBJS_AS_ARGS +=  \
 "lwip/lwip-1.4.0/src/core/dhcp.o" \
 "hal/src/hal_io.o" \
 "gcc/system_same53.o" \
-"tcpip_lite/source/icmp.o" \
 "lwip/lwip-1.4.0/src/netif/ppp/fsm.o" \
 "hpl/wdt/hpl_wdt.o" \
 "lwip/lwip-1.4.0/src/netif/ppp/ppp_oe.o" \
@@ -274,7 +259,6 @@ OBJS_AS_ARGS +=  \
 "hal/src/hal_init.o" \
 "lwip/lwip-1.4.0/src/netif/ppp/vj.o" \
 "examples/driver_examples.o" \
-"tcpip_lite/source/network.o" \
 "hpl/sercom/hpl_sercom.o" \
 "hal/src/hal_sleep.o" \
 "lwip/lwip-1.4.0/src/core/init.o" \
@@ -282,10 +266,8 @@ OBJS_AS_ARGS +=  \
 "usb/device/usbdc.o" \
 "hpl/tc/hpl_tc.o" \
 "lwip/lwip-1.4.0/src/core/dns.o" \
-"tcpip_lite/source/arpv4.o" \
 "hpl/pac/hpl_pac.o" \
 "hpl/gmac/hpl_gmac.o" \
-"tcpip_lite/source/udpv4.o" \
 "lwip/lwip-1.4.0/src/core/snmp/asn1_dec.o" \
 "hal/src/hal_pac.o" \
 "lwip/lwip-1.4.0/src/netif/ppp/ipcp.o" \
@@ -300,15 +282,12 @@ OBJS_AS_ARGS +=  \
 "lwip/lwip-1.4.0/src/core/tcp_in.o" \
 "hal/utils/src/utils_assert.o" \
 "lwip/lwip-1.4.0/src/core/ipv4/ip_addr.o" \
-"tcpip_lite_start.o" \
-"tcpip_lite/source/tcpv4.o" \
 "lwip/lwip-1.4.0/src/core/snmp/mib_structs.o" \
 "main.o" \
 "lwip/lwip-1.4.0/src/core/ipv4/inet.o" \
 "lwip/lwip-1.4.0/src/api/netifapi.o" \
 "lwip/lwip-1.4.0/src/netif/ppp/auth.o" \
 "lwip/lwip-1.4.0/src/api/sockets.o" \
-"tcpip_lite/source/syslog.o" \
 "lwip/lwip-1.4.0/src/core/netif.o" \
 "hal/src/hal_cache.o" \
 "lwip/lwip-1.4.0/src/api/tcpip.o"
@@ -346,8 +325,6 @@ DIR_INCLUDES +=  \
 -I"../ethernet_phy" \
 -I"../" \
 -I"../config" \
--I"../tcpip_lite/ethernet_drivers" \
--I"../tcpip_lite/include" \
 -I"../" \
 -I"../config" \
 -I"../lwip/lwip-1.4.0/port" \
@@ -385,21 +362,18 @@ DEPS_AS_ARGS +=  \
 "lwip/lwip-1.4.0/src/netif/ppp/randm.d" \
 "hal/src/hal_usart_sync.d" \
 "lwip/lwip-1.4.0/src/core/sys.d" \
-"tcpip_lite/source/ipv4.d" \
 "hpl/rtc/hpl_rtc.d" \
 "lwip/lwip-1.4.0/src/netif/ppp/chap.d" \
 "hal/src/hal_gpio.d" \
 "lwip/lwip-1.4.0/src/core/mem.d" \
 "gcc/gcc/startup_same53.d" \
 "lwip/lwip-1.4.0/src/core/ipv4/autoip.d" \
-"tcpip_lite/source/dhcp_client.d" \
 "lwip/lwip-1.4.0/src/core/tcp_in.d" \
 "lwip/lwip-1.4.0/src/api/api_msg.d" \
 "lwip/lwip-1.4.0/src/api/err.d" \
 "lwip/lwip-1.4.0/src/core/timers.d" \
 "lwip/lwip-1.4.0/src/core/ipv4/ip_frag.d" \
 "lwip/lwip-1.4.0/src/core/tcp_out.d" \
-"tcpip_lite/source/mac_address.d" \
 "lwip/lwip-1.4.0/src/netif/ppp/md5.d" \
 "hal/utils/src/utils_list.d" \
 "hpl/sdhc/hpl_sdhc.d" \
@@ -411,7 +385,6 @@ DEPS_AS_ARGS +=  \
 "lwip/lwip-1.4.0/src/core/snmp/msg_out.d" \
 "driver_init.d" \
 "lwip/lwip-1.4.0/src/core/ipv4/ip.d" \
-"tcpip_lite/source/tcpv4.d" \
 "hpl/osc32kctrl/hpl_osc32kctrl.d" \
 "lwip/lwip-1.4.0/src/api/netdb.d" \
 "hal/src/hal_mac_async.d" \
@@ -429,7 +402,6 @@ DEPS_AS_ARGS +=  \
 "hpl/wdt/hpl_wdt.d" \
 "gcc/system_same53.d" \
 "hal/src/hal_io.d" \
-"tcpip_lite/source/icmp.d" \
 "hpl/core/hpl_core_m4.d" \
 "hpl/eic/hpl_eic.d" \
 "lwip/lwip-1.4.0/src/netif/ppp/ppp_oe.d" \
@@ -449,7 +421,6 @@ DEPS_AS_ARGS +=  \
 "hal/src/hal_init.d" \
 "lwip/lwip-1.4.0/src/core/snmp/asn1_enc.d" \
 "lwip/lwip-1.4.0/src/core/ipv4/inet_chksum.d" \
-"tcpip_lite/source/network.d" \
 "examples/driver_examples.d" \
 "lwip/lwip-1.4.0/src/netif/ppp/vj.d" \
 "lwip/lwip-1.4.0/src/core/ipv4/igmp.d" \
@@ -459,9 +430,7 @@ DEPS_AS_ARGS +=  \
 "lwip/lwip-1.4.0/src/netif/ppp/pap.d" \
 "hpl/tc/hpl_tc.d" \
 "usb/device/usbdc.d" \
-"tcpip_lite/source/arpv4.d" \
 "hpl/oscctrl/hpl_oscctrl.d" \
-"tcpip_lite/source/udpv4.d" \
 "hpl/gmac/hpl_gmac.d" \
 "hpl/gclk/hpl_gclk.d" \
 "hal/src/hal_pac.d" \
@@ -477,7 +446,6 @@ DEPS_AS_ARGS +=  \
 "hal/utils/src/utils_assert.d" \
 "ethernet_phy/ethernet_phy.d" \
 "lwip/lwip-1.4.0/src/core/snmp/mib_structs.d" \
-"tcpip_lite_start.d" \
 "lwip/lwip-1.4.0/src/core/ipv4/ip_addr.d" \
 "hpl/mclk/hpl_mclk.d" \
 "lwip/lwip-1.4.0/src/netif/ppp/auth.d" \
@@ -485,7 +453,6 @@ DEPS_AS_ARGS +=  \
 "lwip/lwip-1.4.0/src/api/sockets.d" \
 "main.d" \
 "hal/src/hal_cache.d" \
-"tcpip_lite/source/syslog.d" \
 "lwip/lwip-1.4.0/src/core/netif.d" \
 "lwip/lwip-1.4.0/src/api/tcpip.d"
 
