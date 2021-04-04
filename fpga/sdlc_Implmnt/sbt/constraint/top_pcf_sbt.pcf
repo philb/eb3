@@ -4,7 +4,7 @@
 
 # Version:            2020.12.27943
 
-# File Generated:     Apr 3 2021 20:45:24
+# File Generated:     Apr 4 2021 09:29:56
 
 # Family & Device:    iCE40HX1K
 
@@ -12,17 +12,24 @@
 
 # ##############################################################################
 
-###IOSet List 12
+###IOSet List 19
+set_io flag_fill 46
 set_io idle 93
+set_io irq 87
 set_io mclk 34
+set_io miso 45
 set_io miso_m 54
 set_io mosi_m 51
 set_io netclk 42
 set_io no_clock 91
 set_io reset 63
+set_io rx_enable 62
 set_io rxdata 33
 set_io sck_m 52
 set_io ss_m 53
+set_io tx_error 60
+set_io tx_go 48
+set_io tx_jabber 59
 set_io txdata 41
 set_io txen 40
 

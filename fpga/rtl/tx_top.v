@@ -1,9 +1,9 @@
-module tx_top(clk, netclk, reset, txdata, flag_fill, spi_data[15:0], spi_data_request, spi_data_strobe, go, underrun, overrun);
+module tx_top(clk, netclk, reset, txdata, flag_fill, spi_data[15:0], spi_data_request, spi_data_strobe, go, underrun, overrun, txen, jabber, abort);
    input        clk;
    input 	netclk;
    input 	reset;
    output 	txdata;
-   
+
    input 	flag_fill;
 
    input [15:0] spi_data;
@@ -13,6 +13,9 @@ module tx_top(clk, netclk, reset, txdata, flag_fill, spi_data[15:0], spi_data_re
    input 	go;
    output 	underrun;
    output 	overrun;
+   output 	txen;
+   output 	jabber;
+   input 	abort;
 
    reg [7:0] 	thr;
    reg 		thr_full;
@@ -24,6 +27,8 @@ module tx_top(clk, netclk, reset, txdata, flag_fill, spi_data[15:0], spi_data_re
    reg 		was_spi_data_strobe;
    reg 		spi_data_request;
 
+   reg [19:0] 	jabber_count;
+
    always @(posedge clk or posedge reset)
      begin
 	if (reset)
@@ -33,6 +38,7 @@ module tx_top(clk, netclk, reset, txdata, flag_fill, spi_data[15:0], spi_data_re
 	     was_spi_data_strobe <= 1'b0;
 	     spi_data_request <= 1'b0;
 	     overrun <= 1'b0;
+	     jabber_count <= 0;
 	  end
 	else
 	  begin
