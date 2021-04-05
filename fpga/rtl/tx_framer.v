@@ -1,4 +1,4 @@
-module tx_framer(netclk, reset, txdata, flag_fill, data_in, data_available, data_consumed, eop, underrun);
+module tx_framer(netclk, reset, txdata, flag_fill, data_in, data_available, data_consumed, eop, underrun, active);
 
    input         netclk;
    input 	 reset;
@@ -8,7 +8,8 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in, data_available, data
    input 	 data_available;
    output        data_consumed;
    input 	 eop;
-   output 	 underrun; 	 
+   output 	 underrun;
+   output 	 active;
 
    reg [4:0] 	 state;
 
@@ -27,7 +28,7 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in, data_available, data
    reg [7:0] 	 data;
    reg [4:0] 	 bitn;
    reg [4:0] 	 out_bits;
-   
+
    reg 		 data_consumed;
    reg 		 underrun;
 
@@ -51,12 +52,14 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in, data_available, data
    assign need_zero_insert = (state == IN_FRAME) && (out_bits[4:0] == 5'b11111);
    assign txdata = need_zero_insert ? 1'b0 : ((state == IDLE) ? 1'b1 : ((state == FCS) ? !lfsr[15] : data[0]));
 
+   assign active = (state != IDLE);
+
    always @(negedge netclk or posedge reset)
      begin
 	if (reset)
 	  begin
 	     state <= IDLE;
-	     underrun <= 1'b0;	     
+	     underrun <= 1'b0;
 	  end
 	else
 	  begin
@@ -119,7 +122,7 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in, data_available, data
 				begin
 				   state <= CLOSING_FLAG;
 				   data <= 8'hff;  // underrun, send abort
-				   underrun <= 1'b1;				   
+				   underrun <= 1'b1;
 				end
 			      else
 				begin
@@ -175,4 +178,4 @@ module tx_framer(netclk, reset, txdata, flag_fill, data_in, data_available, data
 	  end // else: !if(reset)
      end // always @ (posedge netclk or posedge reset)
 
-endmodule // tx_top
+endmodule // tx_framer

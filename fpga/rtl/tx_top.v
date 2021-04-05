@@ -83,6 +83,6 @@ module tx_top(clk, netclk, reset, txdata, flag_fill, spi_data[15:0], spi_data_re
 	  end
      end
 
-   tx_framer tx_framer_(netclk, reset, txdata, flag_fill, thr, thr_full, thr_consumed, eop, underrun);
+   tx_framer tx_framer_(netclk, reset, txdata, flag_fill, thr, thr_full, thr_consumed, eop, underrun, txen);
 
 endmodule // tx_top
