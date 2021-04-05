@@ -27,6 +27,8 @@ module tx_top(clk, netclk, reset, txdata, flag_fill, spi_data[15:0], spi_data_re
    reg 		was_spi_data_strobe;
    reg 		spi_data_request;
 
+   reg 		was_go;
+
    reg [19:0] 	jabber_count;
 
    always @(posedge clk or posedge reset)
@@ -39,10 +41,12 @@ module tx_top(clk, netclk, reset, txdata, flag_fill, spi_data[15:0], spi_data_re
 	     spi_data_request <= 1'b0;
 	     overrun <= 1'b0;
 	     jabber_count <= 0;
+	     was_go <= 1'b0;
 	  end
 	else
 	  begin
 	     was_spi_data_strobe <= spi_data_strobe;
+	     was_go <= go;
 
 	     if (spi_data_strobe && !was_spi_data_strobe)
 	       begin
@@ -73,7 +77,7 @@ module tx_top(clk, netclk, reset, txdata, flag_fill, spi_data[15:0], spi_data_re
 		    end
 		  else
 		    begin
-		       if (go && !thr_full)
+		       if (go && !was_go)
 			 begin
 			    eop <= 1'b0;
 			    spi_data_request <= 1'b1;
