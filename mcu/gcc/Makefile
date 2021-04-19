@@ -171,7 +171,7 @@ lwip/lwip-1.4.0/src/core/tcp_in.o \
 hal/utils/src/utils_assert.o \
 lwip/lwip-1.4.0/src/core/ipv4/ip_addr.o \
 lwip/lwip-1.4.0/src/core/snmp/mib_structs.o \
-main.o \
+main.o debug.o \
 lwip/lwip-1.4.0/src/core/ipv4/inet.o \
 lwip/lwip-1.4.0/src/api/netifapi.o \
 lwip/lwip-1.4.0/src/netif/ppp/auth.o \
@@ -283,7 +283,7 @@ OBJS_AS_ARGS +=  \
 "hal/utils/src/utils_assert.o" \
 "lwip/lwip-1.4.0/src/core/ipv4/ip_addr.o" \
 "lwip/lwip-1.4.0/src/core/snmp/mib_structs.o" \
-"main.o" \
+"main.o" "debug.o" \
 "lwip/lwip-1.4.0/src/core/ipv4/inet.o" \
 "lwip/lwip-1.4.0/src/api/netifapi.o" \
 "lwip/lwip-1.4.0/src/netif/ppp/auth.o" \
@@ -474,7 +474,7 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 	@echo Building target: $@
 	@echo Invoking: ARM/GNU Linker
 	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -o $(OUTPUT_FILE_NAME).elf $(OBJS_AS_ARGS) -Wl,--start-group -lm -Wl,--end-group -mthumb \
--Wl,-Map="$(OUTPUT_FILE_NAME).map" --specs=nano.specs -Wl,--gc-sections -mcpu=cortex-m4 \
+-Wl,-Map="$(OUTPUT_FILE_NAME).map" --specs=nosys.specs -Wl,--gc-sections -mcpu=cortex-m4 \
  \
 -T"../gcc/gcc/same53n19a_flash.ld" \
 -L"../gcc/gcc"
@@ -517,7 +517,7 @@ $(DIR_INCLUDES) \
 %.o: %.S
 	@echo Building file: $<
 	@echo ARM/GNU Preprocessing Assembler
-	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
+	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x assembler -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
 -D__SAME53N19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
 $(DIR_INCLUDES) \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"

@@ -80,9 +80,11 @@ static void TIMER_0_init(void)
 void USART_0_PORT_init(void)
 {
 
+#if 0
 	gpio_set_pin_function(PA00, PINMUX_PA00D_SERCOM1_PAD0);
 
 	gpio_set_pin_function(PA01, PINMUX_PA01D_SERCOM1_PAD1);
+#endif
 }
 
 void USART_0_CLOCK_init(void)
@@ -96,7 +98,7 @@ void USART_0_CLOCK_init(void)
 void USART_0_init(void)
 {
 	USART_0_CLOCK_init();
-	usart_sync_init(&USART_0, SERCOM1, (void *)NULL);
+	usart_sync_init(&USART_0, SERCOM7, (void *)NULL);
 	USART_0_PORT_init();
 }
 
