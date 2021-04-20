@@ -49,7 +49,7 @@ debug_put_hex32:
 	mov	r0, r3
 	bl	debug_put_hex
 	pop	{pc}
-	
+
 	.globl	debug_puts
 	.thumb_func
 debug_puts:
@@ -64,7 +64,7 @@ debug_puts:
 	b	1b
 2:
 	pop	{r4, pc}
-	
+
 	.globl	HardFault_Handler
 	.thumb_func
 HardFault_Handler:
@@ -89,4 +89,3 @@ hfstr:
 	.align
 
 #endif
-	

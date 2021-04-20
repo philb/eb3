@@ -9,7 +9,7 @@
 // <q> Enable DHCP
 // <id> lwip_dhcp
 #ifndef LWIP_DHCP
-#define LWIP_DHCP 0
+#define LWIP_DHCP 1
 #endif
 
 // <q> NO RTOS
@@ -41,13 +41,13 @@
 // <q> Enables ICMP
 // <id> lwip_icmp
 #ifndef LWIP_ICMP
-#define LWIP_ICMP 0
+#define LWIP_ICMP 1
 #endif
 
 // <q> Enables AUTOIP
 // <id> lwip_autoip
 #ifndef LWIP_AUTOIP
-#define LWIP_AUTOIP 0
+#define LWIP_AUTOIP 1
 #endif
 
 // <q> Enables SNMP
@@ -71,7 +71,7 @@
 // <q> Enables DNS
 // <id> lwip_dns
 #ifndef LWIP_DNS
-#define LWIP_DNS 0
+#define LWIP_DNS 1
 #endif
 // <q> Enable PPP
 // <id> lwip_ppp_support
@@ -174,7 +174,7 @@
 // <q> Enables application layer to hook into the IP layer itself
 // <id> lwip_raw
 #ifndef LWIP_RAW
-#define LWIP_RAW 0
+#define LWIP_RAW 1
 #endif
 
 // <q> Enable interface up/down status callback
