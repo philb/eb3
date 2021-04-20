@@ -508,7 +508,7 @@
  * \brief USB's Clock frequency
  */
 #ifndef CONF_GCLK_USB_FREQUENCY
-#define CONF_GCLK_USB_FREQUENCY 12000000
+#define CONF_GCLK_USB_FREQUENCY 48000000
 #endif
 
 // <<< end of configuration section >>>
