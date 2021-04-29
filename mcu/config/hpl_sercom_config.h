@@ -433,13 +433,13 @@
 #endif
 
 // Enable configuration of module
-#ifndef CONF_SERCOM_5_SPI_ENABLE
-#define CONF_SERCOM_5_SPI_ENABLE 1
+#ifndef CONF_SERCOM_0_SPI_ENABLE
+#define CONF_SERCOM_0_SPI_ENABLE 1
 #endif
 
 // Set module in SPI Slave mode
-#ifndef CONF_SERCOM_5_SPI_MODE
-#define CONF_SERCOM_5_SPI_MODE 0x02
+#ifndef CONF_SERCOM_0_SPI_MODE
+#define CONF_SERCOM_0_SPI_MODE 0x02
 #endif
 
 // <h> Basic Configuration
@@ -447,8 +447,8 @@
 // <q> Receive buffer enable
 // <i> Enable receive buffer to receive data from slave. (RXEN)
 // <id> spi_slave_rx_enable
-#ifndef CONF_SERCOM_5_SPI_RXEN
-#define CONF_SERCOM_5_SPI_RXEN 0x1
+#ifndef CONF_SERCOM_0_SPI_RXEN
+#define CONF_SERCOM_0_SPI_RXEN 0x1
 #endif
 
 // <o> Character Size
@@ -456,16 +456,16 @@
 // <0x0=>8 bits
 // <0x1=>9 bits
 // <id> spi_slave_character_size
-#ifndef CONF_SERCOM_5_SPI_CHSIZE
-#define CONF_SERCOM_5_SPI_CHSIZE 0x0
+#ifndef CONF_SERCOM_0_SPI_CHSIZE
+#define CONF_SERCOM_0_SPI_CHSIZE 0x0
 #endif
 
 // </h>
 
 // <e> Advanced Configuration
 // <id> spi_slave_advanced
-#ifndef CONF_SERCOM_5_SPI_ADVANCED
-#define CONF_SERCOM_5_SPI_ADVANCED 0
+#ifndef CONF_SERCOM_0_SPI_ADVANCED
+#define CONF_SERCOM_0_SPI_ADVANCED 0
 #endif
 
 // <o> Data Order
@@ -473,8 +473,8 @@
 // <1=>LSB first
 // <i> I least significant or most significant bit is shifted out first. (DORD)
 // <id> spi_slave_arch_dord
-#ifndef CONF_SERCOM_5_SPI_DORD
-#define CONF_SERCOM_5_SPI_DORD 0x0
+#ifndef CONF_SERCOM_0_SPI_DORD
+#define CONF_SERCOM_0_SPI_DORD 0x1
 #endif
 
 // <o> Clock Polarity
@@ -482,8 +482,8 @@
 // <1=>SCK is high when idle
 // <i> Determines if the leading edge is rising or falling with a corresponding opposite edge at the trailing edge. (CPOL)
 // <id> spi_slave_arch_cpol
-#ifndef CONF_SERCOM_5_SPI_CPOL
-#define CONF_SERCOM_5_SPI_CPOL 0x0
+#ifndef CONF_SERCOM_0_SPI_CPOL
+#define CONF_SERCOM_0_SPI_CPOL 0x1
 #endif
 
 // <o> Clock Phase
@@ -491,8 +491,8 @@
 // <0x1=>Sample input on trailing edge
 // <i> Determines if input data is sampled on leading or trailing SCK edge. (CPHA)
 // <id> spi_slave_arch_cpha
-#ifndef CONF_SERCOM_5_SPI_CPHA
-#define CONF_SERCOM_5_SPI_CPHA 0x1
+#ifndef CONF_SERCOM_0_SPI_CPHA
+#define CONF_SERCOM_0_SPI_CPHA 0x1
 #endif
 
 // <o> Immediate Buffer Overflow Notification
@@ -500,29 +500,29 @@
 // <0x0=>In data stream
 // <0x1=>On buffer overflow
 // <id> spi_slave_arch_ibon
-#ifndef CONF_SERCOM_5_SPI_IBON
-#define CONF_SERCOM_5_SPI_IBON 0x0
+#ifndef CONF_SERCOM_0_SPI_IBON
+#define CONF_SERCOM_0_SPI_IBON 0x0
 #endif
 
 // <q> Slave Select Low Detect Enable
 // <i> This bit enables wake up when the slave select (_SS) pin transitions from high to low. (SSDE)
 // <id> spi_slave_arch_ssde
-#ifndef CONF_SERCOM_5_SPI_SSDE
-#define CONF_SERCOM_5_SPI_SSDE 0
+#ifndef CONF_SERCOM_0_SPI_SSDE
+#define CONF_SERCOM_0_SPI_SSDE 0
 #endif
 
 // <q> Slave Detect Preload Enable
 // <i> Setting this bit will enable preloading of the slave shift register when there is no transfer in progress. (PLOADEN)
 // <id> spi_slave_arch_ploaden
-#ifndef CONF_SERCOM_5_SPI_PLOADEN
-#define CONF_SERCOM_5_SPI_PLOADEN 0
+#ifndef CONF_SERCOM_0_SPI_PLOADEN
+#define CONF_SERCOM_0_SPI_PLOADEN 0
 #endif
 
 // <q> Enable SPI address mode
 // <i> This will enable SPI frames with address, first received character is treated as address. (FORM=SPI_ADDR)
 // <id> spi_slave_arch_amode_en
-#ifndef CONF_SERCOM_5_SPI_AMODE_EN
-#define CONF_SERCOM_5_SPI_AMODE_EN 0
+#ifndef CONF_SERCOM_0_SPI_AMODE_EN
+#define CONF_SERCOM_0_SPI_AMODE_EN 0
 #endif
 
 // <o> Address Mode
@@ -531,29 +531,29 @@
 // <0x2=>Address range
 // <i> These bits set the slave addressing mode when the frame format with address is used. (AMODE)
 // <id> spi_slave_arch_amode
-#ifndef CONF_SERCOM_5_SPI_AMODE
-#define CONF_SERCOM_5_SPI_AMODE 0
+#ifndef CONF_SERCOM_0_SPI_AMODE
+#define CONF_SERCOM_0_SPI_AMODE 0
 #endif
 
 // <o> Address <0-255>
 // <i> These bits hold the address when SPI address modes is enabled. (ADDR)
 // <id> spi_slave_arch_addr
-#ifndef CONF_SERCOM_5_SPI_ADDR
-#define CONF_SERCOM_5_SPI_ADDR 0
+#ifndef CONF_SERCOM_0_SPI_ADDR
+#define CONF_SERCOM_0_SPI_ADDR 0
 #endif
 
 // <o> Address mask <0-255>
 // <i> These bits hold the address mask when SPI address mode is enabled. (ADDRMASK)
 // <id> spi_slave_arch_addrmask
-#ifndef CONF_SERCOM_5_SPI_ADDRMASK
-#define CONF_SERCOM_5_SPI_ADDRMASK 0
+#ifndef CONF_SERCOM_0_SPI_ADDRMASK
+#define CONF_SERCOM_0_SPI_ADDRMASK 0
 #endif
 
 // <q> Run in stand-by
 // <i> Module stays active in stand-by sleep mode. (RUNSTDBY)
 // <id> spi_slave_arch_runstdby
-#ifndef CONF_SERCOM_5_SPI_RUNSTDBY
-#define CONF_SERCOM_5_SPI_RUNSTDBY 0x0
+#ifndef CONF_SERCOM_0_SPI_RUNSTDBY
+#define CONF_SERCOM_0_SPI_RUNSTDBY 0x0
 #endif
 
 // <o> Debug Stop Mode
@@ -561,15 +561,15 @@
 // <0=>Keep running
 // <1=>Halt
 // <id> spi_slave_arch_dbgstop
-#ifndef CONF_SERCOM_5_SPI_DBGSTOP
-#define CONF_SERCOM_5_SPI_DBGSTOP 0
+#ifndef CONF_SERCOM_0_SPI_DBGSTOP
+#define CONF_SERCOM_0_SPI_DBGSTOP 0
 #endif
 
 // </e>
 
 // This bit is not applicable in slave mode
-#ifndef CONF_SERCOM_5_SPI_MSSEN
-#define CONF_SERCOM_5_SPI_MSSEN 0x0
+#ifndef CONF_SERCOM_0_SPI_MSSEN
+#define CONF_SERCOM_0_SPI_MSSEN 0x0
 #endif
 
 // <o> Receive Data Pinout
@@ -578,8 +578,8 @@
 // <0x2=>PAD[2]
 // <0x3=>PAD[3]
 // <id> spi_slave_rxpo
-#ifndef CONF_SERCOM_5_SPI_RXPO
-#define CONF_SERCOM_5_SPI_RXPO 0
+#ifndef CONF_SERCOM_0_SPI_RXPO
+#define CONF_SERCOM_0_SPI_RXPO 0
 #endif
 
 // <o> Transmit Data Pinout
@@ -588,16 +588,16 @@
 // <0x2=>PAD[3,1]_DO_SCK
 // <0x3=>PAD[0,3]_DO_SCK
 // <id> spi_slave_txpo
-#ifndef CONF_SERCOM_5_SPI_TXPO
-#define CONF_SERCOM_5_SPI_TXPO 2
+#ifndef CONF_SERCOM_0_SPI_TXPO
+#define CONF_SERCOM_0_SPI_TXPO 2
 #endif
 
-#ifndef CONF_SERCOM_5_SPI_BAUD_RATE
-#define CONF_SERCOM_5_SPI_BAUD_RATE 0
+#ifndef CONF_SERCOM_0_SPI_BAUD_RATE
+#define CONF_SERCOM_0_SPI_BAUD_RATE 0
 #endif
 
-#ifndef CONF_SERCOM_5_SPI_DUMMYBYTE
-#define CONF_SERCOM_5_SPI_DUMMYBYTE 0x0
+#ifndef CONF_SERCOM_0_SPI_DUMMYBYTE
+#define CONF_SERCOM_0_SPI_DUMMYBYTE 0x0
 #endif
 
 // <<< end of configuration section >>>

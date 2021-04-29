@@ -162,9 +162,9 @@ void SPI_1_PORT_init(void)
 {
 
 	// Set pin direction to input
-	gpio_set_pin_direction(PB16, GPIO_DIRECTION_IN);
+	gpio_set_pin_direction(PB24, GPIO_DIRECTION_IN);
 
-	gpio_set_pin_pull_mode(PB16,
+	gpio_set_pin_pull_mode(PB24,
 	                       // <y> Pull configuration
 	                       // <id> pad_pull_config
 	                       // <GPIO_PULL_OFF"> Off
@@ -172,9 +172,9 @@ void SPI_1_PORT_init(void)
 	                       // <GPIO_PULL_DOWN"> Pull-down
 	                       GPIO_PULL_OFF);
 
-	gpio_set_pin_function(PB16, PINMUX_PB16C_SERCOM5_PAD0);
+	gpio_set_pin_function(PB24, PINMUX_PB24C_SERCOM0_PAD0);
 
-	gpio_set_pin_level(PB17,
+	gpio_set_pin_level(PB25,
 	                   // <y> Initial level
 	                   // <id> pad_initial_level
 	                   // <false"> Low
@@ -182,14 +182,14 @@ void SPI_1_PORT_init(void)
 	                   false);
 
 	// Set pin direction to output
-	gpio_set_pin_direction(PB17, GPIO_DIRECTION_OUT);
+	gpio_set_pin_direction(PB25, GPIO_DIRECTION_OUT);
 
-	gpio_set_pin_function(PB17, PINMUX_PB17C_SERCOM5_PAD1);
+	gpio_set_pin_function(PB25, PINMUX_PB25C_SERCOM0_PAD1);
 
 	// Set pin direction to input
-	gpio_set_pin_direction(PB18, GPIO_DIRECTION_IN);
+	gpio_set_pin_direction(PC24, GPIO_DIRECTION_IN);
 
-	gpio_set_pin_pull_mode(PB18,
+	gpio_set_pin_pull_mode(PC24,
 	                       // <y> Pull configuration
 	                       // <id> pad_pull_config
 	                       // <GPIO_PULL_OFF"> Off
@@ -197,9 +197,9 @@ void SPI_1_PORT_init(void)
 	                       // <GPIO_PULL_DOWN"> Pull-down
 	                       GPIO_PULL_OFF);
 
-	gpio_set_pin_function(PB18, PINMUX_PB18C_SERCOM5_PAD2);
+	gpio_set_pin_function(PC24, PINMUX_PC24C_SERCOM0_PAD2);
 
-	gpio_set_pin_level(PB19,
+	gpio_set_pin_level(PC25,
 	                   // <y> Initial level
 	                   // <id> pad_initial_level
 	                   // <false"> Low
@@ -207,23 +207,23 @@ void SPI_1_PORT_init(void)
 	                   false);
 
 	// Set pin direction to output
-	gpio_set_pin_direction(PB19, GPIO_DIRECTION_OUT);
+	gpio_set_pin_direction(PC25, GPIO_DIRECTION_OUT);
 
-	gpio_set_pin_function(PB19, PINMUX_PB19C_SERCOM5_PAD3);
+	gpio_set_pin_function(PC25, PINMUX_PC25C_SERCOM0_PAD3);
 }
 
 void SPI_1_CLOCK_init(void)
 {
-	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM5_GCLK_ID_CORE, CONF_GCLK_SERCOM5_CORE_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
-	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM5_GCLK_ID_SLOW, CONF_GCLK_SERCOM5_SLOW_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
+	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM0_GCLK_ID_CORE, CONF_GCLK_SERCOM0_CORE_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
+	hri_gclk_write_PCHCTRL_reg(GCLK, SERCOM0_GCLK_ID_SLOW, CONF_GCLK_SERCOM0_SLOW_SRC | (1 << GCLK_PCHCTRL_CHEN_Pos));
 
-	hri_mclk_set_APBDMASK_SERCOM5_bit(MCLK);
+	hri_mclk_set_APBAMASK_SERCOM0_bit(MCLK);
 }
 
 void SPI_1_init(void)
 {
 	SPI_1_CLOCK_init();
-	spi_s_sync_init(&SPI_1, SERCOM5);
+	spi_s_sync_init(&SPI_1, SERCOM0);
 	SPI_1_PORT_init();
 }
 
