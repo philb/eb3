@@ -36,10 +36,10 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 
    assign dout[7:0] = rx_latch[7:0];
 
-   assign is_flag = (rx_shift[7:0] == 8'b01111110);
-   assign is_abort = (rx_shift[7:1] == 7'b1111111);
+   assign is_flag = ({rxdata, rx_shift[7:1]} == 8'b01111110);
+   assign is_abort = ({rxdata, rx_shift[7:2]} == 7'b1111111);
    assign is_stuffing = ({ rxdata, rx_shift[7:3] } == 6'b011111);
-   assign idle = (rx_shift[7:0] == 8'b11111111);
+   assign idle = ({rxdata, rx_shift[7:1]} == 8'b11111111);
 
    assign new_crc[0]  = rx_shift[7] ^ lfsr[15];
    assign new_crc[1]  = lfsr[0];
@@ -60,13 +60,16 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 
    assign good_fcs = (new_crc[15:0] == 16'h1d0f);
 
+   wire [7:0] 	new_byte;
+   assign new_byte = { rxdata, byte[7:1] };
+
    always @(posedge netclk or posedge reset)
      begin
 	if (reset)
 	  begin
 	     state <= HUNT;
 	     bit <= 3'b000;
-	     rx_shift <= 7'b1111111;
+	     rx_shift <= 8'b11111111;
 	     frame_complete <= 1'b0;
 	     frame_valid <= 1'b0;
 	     frame_abort <= 1'b0;
@@ -108,7 +111,7 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 		   end
 		 else if (!is_stuffing)
 		   begin
-		      byte <= { rxdata, byte[7:1] };
+		      byte <= new_byte;
 		      lfsr <= new_crc;
 		      if (bit == 3'h7)
 			begin
@@ -116,7 +119,7 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 			   frame_valid <= 1'b0;
 			   state <= IN_FRAME;
 			   bit <= 3'h0;
-			   rx_latch <= byte;
+			   rx_latch <= new_byte;
 			   byte_ready <= 1'b1;
 			end
 		      else
@@ -140,13 +143,13 @@ module rx_deframer(netclk, reset, rxdata, frame_abort, idle, frame_complete, fra
 		   end
 		 else if (!is_stuffing)
 		   begin
-		      byte <= { rxdata, byte[7:1] };
+		      byte <= new_byte;
 		      lfsr <= new_crc;
 		      if (bit == 3'h7)
 			begin
 			   bit <= 3'h0;
 			   byte_ready <= 1'b1;
-			   rx_latch <= byte;
+			   rx_latch <= new_byte;
 			   frame_valid <= good_fcs;
 			end
 		      else
