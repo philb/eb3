@@ -1,6 +1,6 @@
 // Move data between the CPU and transmit/receive blocks using SPI
 //
-// Port naming in this module is from the perspective of the CPU, 
+// Port naming in this module is from the perspective of the CPU,
 // so "rx_data" is data coming out of the receiver and going to
 // the CPU.
 //
@@ -33,47 +33,54 @@
 // cycles on average.  This is still fine because the 25MHz MCLK is
 // at least an order of magnitude faster than the ~500kHz line clock.
 
-module spi_master(clk, reset, rx_data, rx_strobe, rx_accept, tx_request, tx_data, tx_strobe, ss, sck, mosi, miso);
+module spi_master(clk, reset, rx_data, rx_strobe, rx_accept, tx_request, tx_data, tx_strobe, ss, sck_out, mosi, miso);
 
    input clk;
    input reset;
-   
+
    input [15:0]  rx_data;
    input 	 rx_strobe;
    output 	 rx_accept;
 
-   input 	 tx_request;   
+   input 	 tx_request;
    output [15:0] tx_data;
    output 	 tx_strobe;
 
    output 	 ss;
-   output 	 sck;
+   output 	 sck_out;
    output 	 mosi;
-   input 	 miso;   
+   input 	 miso;
 
    reg [15:0] 	 rx_reg;
-   reg [15:0] 	 tx_reg;   
-   
+   reg [15:0] 	 tx_reg;
+
    reg [2:0] 	 state;
    reg [3:0] 	 bit;
 
    reg 		 sck;
-   reg 		 mosi;	
+   reg 		 mosi;
    reg 		 ss;
 
    reg 		 rx_accept;
-   reg 		 tx_strobe;   
+   reg 		 tx_strobe;
 
    wire 	 mosi_next;
-   
+
+   reg		 sck_en;
+   wire		 sck_en_next;
+
+   assign sck_out = sck || !sck_en;
+
    parameter IDLE = 3'b000;
+   parameter START = 3'b001;
    parameter RUN = 3'b010;
    parameter END = 3'b100;
 
    assign mosi_next = rx_reg[0];
-   assign ss_next = !(state == RUN);
-   assign tx_data[15:0] = tx_reg[15:0];   
- 
+   assign ss_next = !(state != IDLE && state != END);
+   assign sck_en_next = (state != IDLE && state != END && !(state == RUN && bit == 8'hf));
+   assign tx_data[15:0] = tx_reg[15:0];
+
    always @(posedge clk or posedge reset)
      begin
 	if (reset)
@@ -82,16 +89,16 @@ module spi_master(clk, reset, rx_data, rx_strobe, rx_accept, tx_request, tx_data
 	  end
 	else
 	  begin
-	     sck <= !sck;	     
+	     sck <= !sck;
 	  end
-     end   
+     end
 
    always @(negedge sck or posedge reset)
      begin
 	if (reset)
 	  begin
 	     mosi <= 1'b1;
-	     ss <= 1'b1;	     
+	     ss <= 1'b1;
 	  end
 	else
 	  begin
@@ -105,20 +112,22 @@ module spi_master(clk, reset, rx_data, rx_strobe, rx_accept, tx_request, tx_data
 	if (reset)
 	  begin
 	     bit <= 4'h0;
-	     state <= IDLE;
+	     state <= START;
 	     rx_reg <= 16'h0000;
 	     tx_reg <= 16'h0000;
 	     rx_accept <= 1'b0;
-	     tx_strobe <= 1'b0;	     
+	     tx_strobe <= 1'b0;
+	     sck_en <= 1'b0;
 	  end
 	else
 	  begin
+	     sck_en <= sck_en_next;
 	     case (state)
 	       IDLE:
 		 if (rx_strobe || tx_request)
 		   begin
-		      bit <= 4'h0;		      
-		      state <= RUN;
+		      bit <= 4'h0;
+		      state <= START;
 		      if (rx_strobe)
 			begin
 			   rx_reg <= rx_data;
@@ -127,14 +136,19 @@ module spi_master(clk, reset, rx_data, rx_strobe, rx_accept, tx_request, tx_data
 		      else
 			begin
 			   rx_reg <= 16'hffff;
-			   rx_accept <= 1'b0;			   
+			   rx_accept <= 1'b0;
 			end
 		   end // if (rx_strobe || tx_request)
+
+	       START:
+		 begin
+		    state <= RUN;
+		 end
 
 	       RUN:
 		 begin
 		    rx_accept <= 1'b0;
-		    
+
 		    rx_reg <= { 1'b1, rx_reg[15:1] };
 		    tx_reg <= { miso, tx_reg[15:1] };
 		    if (bit == 4'hf)
@@ -143,24 +157,24 @@ module spi_master(clk, reset, rx_data, rx_strobe, rx_accept, tx_request, tx_data
 			 if (tx_request)
 			   begin
 			      tx_strobe <= 1'b1;
-			   end		 
+			   end
 		      end
 		    else
 		      begin
 			 bit <= bit + 1;
 		      end
 		 end
-	       	       
+
 	       END:
 		 begin
 		    if (!tx_request || !tx_strobe)
 		      begin
 			 tx_strobe <= 1'b0;
-			 state <= IDLE;			 
+			 state <= IDLE;
 		      end
 		 end
-	     endcase // case (state)	     
-	  end	
+	     endcase // case (state)
+	  end
      end
-   
+
 endmodule // spi_master
