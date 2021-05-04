@@ -124,7 +124,7 @@ hal/src/hal_wdt.o \
 lwip/lwip-1.4.0/src/core/tcp_in.o \
 hal/utils/src/utils_assert.o \
 lwip/lwip-1.4.0/src/core/ipv4/ip_addr.o \
-main.o debug.o \
+main.o debug.o fpga.o timers.o \
 lwip/lwip-1.4.0/src/core/ipv4/inet.o \
 lwip/lwip-1.4.0/src/api/netifapi.o \
 lwip/lwip-1.4.0/src/api/sockets.o \
@@ -216,13 +216,13 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 
 # Compiler targets
 %.o: %.c
-	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
+	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -g3 -Wall -c -std=gnu99 \
 -D__SAME53N19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
 $(DIR_INCLUDES) \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 
 %.o: %.s
-	$(QUOTE)arm-none-eabi-as$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
+	$(QUOTE)arm-none-eabi-as$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -g3 -Wall -c -std=gnu99 \
 -D__SAME53N19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
 $(DIR_INCLUDES) \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
@@ -230,7 +230,7 @@ $(DIR_INCLUDES) \
 %.o: %.S
 	@echo Building file: $<
 	@echo ARM/GNU Preprocessing Assembler
-	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x assembler -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
+	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x assembler -mthumb -DDEBUG -Os -ffunction-sections -g3 -Wall -c -std=gnu99 \
 -D__SAME53N19A__ -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 \
 $(DIR_INCLUDES) \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"

@@ -1,54 +1,10 @@
 #include <atmel_start.h>
 #include <hal_gpio.h>
 
-#define PB03 GPIO(GPIO_PORTB, 3)
-#define PB05 GPIO(GPIO_PORTB, 5)
-#define PB14 GPIO(GPIO_PORTB, 14)
-#define PB15 GPIO(GPIO_PORTB, 15)
-#define PB16 GPIO(GPIO_PORTB, 16)
-#define PB17 GPIO(GPIO_PORTB, 17)
-#define PB18 GPIO(GPIO_PORTB, 18)
-#define PB19 GPIO(GPIO_PORTB, 19)
-#define PB20 GPIO(GPIO_PORTB, 20)
-#define PB21 GPIO(GPIO_PORTB, 21)
-
-#define PA02 GPIO(GPIO_PORTA, 2)
-#define PA14 GPIO(GPIO_PORTA, 14)
-#define PA16 GPIO(GPIO_PORTA, 16)
-#define PA20 GPIO(GPIO_PORTA, 20)
-#define PA21 GPIO(GPIO_PORTA, 21)
-#define PA22 GPIO(GPIO_PORTA, 22)
-
-#define PC00 GPIO(GPIO_PORTC, 0)
-#define PC01 GPIO(GPIO_PORTC, 1)
-#define PC02 GPIO(GPIO_PORTC, 2)
-#define PC24 GPIO(GPIO_PORTC, 24)
-
-#define FPGA_SOFT_RESET	PB16
-#define FPGA_RX_ENABLE  PB18
-#define FPGA_TX_GO      PB19
-#define FPGA_FLAG_FILL  PA22
-
-#define FPGA_IDLE	PA20
-#define FPGA_NO_CLOCK	PA21
-
-#define LED_SD		PA02
-#define LED_ECONET	PA01
-#define LED_ONLINE	PA00
-#define LED_ERROR	PC00
-#define LED_ETHERNET	PC01
-#define LED_NO_CLOCK	PC02
-
-static const uint8_t fpga_image[] = {
-#include "gcc/fpga_image.h"
-};
-
-void msleep(int ms)
-{
-	volatile int i;
-	for (i = 0; i < 10 * ms; i++)
-		;
-}
+#include "gpios.h"
+#include "fpga.h"
+#include "debug.h"
+#include "timers.h"
 
 void die()
 {
@@ -126,30 +82,6 @@ void lamp_test()
 	}
 }
 
-void load_fpga()
-{
-	spi_m_sync_enable(&SPI_0);
-
-	// CRESET high
-	gpio_set_pin_level(PB20, true);
-
-	msleep(100);
-
-	struct spi_xfer msg;
-	memset(&msg, 0, sizeof(msg));
-	msg.txbuf = (uint8_t *)&fpga_image[0];
-	msg.size = sizeof(fpga_image);
-	int r = spi_m_sync_transfer(&SPI_0, &msg);
-	if (r < 0) { debug_puts("SPI fail\n"); die(); }
-
-	if (gpio_get_pin_level(PB21) == 0) { debug_puts("No CDONE\n"); die(); }
-
-	memset(&msg, 0, sizeof(msg));
-	msg.txbuf = (uint8_t *)&fpga_image[0];
-	msg.size = 8;
-	spi_m_sync_transfer(&SPI_0, &msg);
-}
-
 int main(void)
 {
 	// Turn error LED on before doing anything else in case we get stuck
@@ -224,7 +156,7 @@ int main(void)
 
 	gpio_set_pin_level(PB05, true);
 
-	load_fpga();
+	fpga_load();
 
 	//vendor_example();
 
