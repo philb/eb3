@@ -124,7 +124,7 @@ hal/src/hal_wdt.o \
 lwip/lwip-1.4.0/src/core/tcp_in.o \
 hal/utils/src/utils_assert.o \
 lwip/lwip-1.4.0/src/core/ipv4/ip_addr.o \
-main.o debug.o fpga.o timers.o \
+main.o debug.o fpga.o econet.o timers.o \
 lwip/lwip-1.4.0/src/core/ipv4/inet.o \
 lwip/lwip-1.4.0/src/api/netifapi.o \
 lwip/lwip-1.4.0/src/api/sockets.o \
