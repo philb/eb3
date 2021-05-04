@@ -8,7 +8,7 @@
 // <i> Indicates whether dmac is enabled or not
 // <id> dmac_enable
 #ifndef CONF_DMAC_ENABLE
-#define CONF_DMAC_ENABLE 0
+#define CONF_DMAC_ENABLE 1
 #endif
 
 // <q> Priority Level 0
@@ -105,7 +105,7 @@
 // <e> Channel 0 settings
 // <id> dmac_channel_0_settings
 #ifndef CONF_DMAC_CHANNEL_0_SETTINGS
-#define CONF_DMAC_CHANNEL_0_SETTINGS 0
+#define CONF_DMAC_CHANNEL_0_SETTINGS 1
 #endif
 
 // <q> Channel Run in Standby
@@ -214,7 +214,7 @@
 // <i> Defines the peripheral trigger which is source of the transfer
 // <id> dmac_trifsrc_0
 #ifndef CONF_DMAC_TRIGSRC_0
-#define CONF_DMAC_TRIGSRC_0 0
+#define CONF_DMAC_TRIGSRC_0 0xD
 #endif
 
 // <o> Channel Arbitration Level
@@ -277,14 +277,14 @@
 // <i> Defines whether source or destination addresses are using the step size settings
 // <id> dmac_stepsel_0
 #ifndef CONF_DMAC_STEPSEL_0
-#define CONF_DMAC_STEPSEL_0 0
+#define CONF_DMAC_STEPSEL_0 1
 #endif
 
 // <q> Source Address Increment
 // <i> Indicates whether the source address incrementation is enabled or not
 // <id> dmac_srcinc_0
 #ifndef CONF_DMAC_SRCINC_0
-#define CONF_DMAC_SRCINC_0 0
+#define CONF_DMAC_SRCINC_0 1
 #endif
 
 // <q> Destination Address Increment
@@ -329,7 +329,7 @@
 // <e> Channel 1 settings
 // <id> dmac_channel_1_settings
 #ifndef CONF_DMAC_CHANNEL_1_SETTINGS
-#define CONF_DMAC_CHANNEL_1_SETTINGS 0
+#define CONF_DMAC_CHANNEL_1_SETTINGS 1
 #endif
 
 // <q> Channel Run in Standby
@@ -438,7 +438,7 @@
 // <i> Defines the peripheral trigger which is source of the transfer
 // <id> dmac_trifsrc_1
 #ifndef CONF_DMAC_TRIGSRC_1
-#define CONF_DMAC_TRIGSRC_1 0
+#define CONF_DMAC_TRIGSRC_1 0xc
 #endif
 
 // <o> Channel Arbitration Level
@@ -492,7 +492,7 @@
 // <i> Defines the address increment step size, applies to source or destination address
 // <id> dmac_stepsize_1
 #ifndef CONF_DMAC_STEPSIZE_1
-#define CONF_DMAC_STEPSIZE_1 0
+#define CONF_DMAC_STEPSIZE_1 1
 #endif
 
 // <o> Step Selection
@@ -515,7 +515,7 @@
 // <i> Indicates whether the destination address incrementation is enabled or not
 // <id> dmac_dstinc_1
 #ifndef CONF_DMAC_DSTINC_1
-#define CONF_DMAC_DSTINC_1 0
+#define CONF_DMAC_DSTINC_1 1
 #endif
 
 // <o> Beat Size

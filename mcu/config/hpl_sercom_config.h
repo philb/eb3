@@ -515,7 +515,7 @@
 // <i> Setting this bit will enable preloading of the slave shift register when there is no transfer in progress. (PLOADEN)
 // <id> spi_slave_arch_ploaden
 #ifndef CONF_SERCOM_0_SPI_PLOADEN
-#define CONF_SERCOM_0_SPI_PLOADEN 0
+#define CONF_SERCOM_0_SPI_PLOADEN 1
 #endif
 
 // <q> Enable SPI address mode
